@@ -48,6 +48,12 @@ public class CustomerController {
 		mv.setViewName("customerlogin");
 		return mv;
 	}
+	@GetMapping("customerhome")
+	public ModelAndView customerhome(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("customerhome");
+		return mv;
+	}
 	
 	 @PostMapping("checkcustomerlogin")
 	  public ModelAndView checkadminlogin(HttpServletRequest request)
