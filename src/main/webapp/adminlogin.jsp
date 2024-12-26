@@ -17,9 +17,9 @@ color:red;
 <div>
 <h2>Admin Login</h2>
 <label>User Name:</label>
-<input type="text" placeholder="Enter user name" name="name"/><br><br>
+<input type="text" placeholder="Enter user name" name="name" required="required"/><br><br>
 <label>Password:</label>
-<input type="password" placeholder="Enter Password" name="password"/><br><br>
+<input type="password" placeholder="Enter Password" name="password" required="required"/><br><br>
 <input type="submit" value="Login"/>&nbsp;&nbsp;
 <input type="reset" value="clear"/>&nbsp;&nbsp;
 <div class="note">

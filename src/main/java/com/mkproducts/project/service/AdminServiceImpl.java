@@ -77,11 +77,6 @@ public class AdminServiceImpl implements AdminService {
 	}
 	
 	@Override
-	public MarketRate updateRate(MarketRate marketRate) {
-        return marketRateRepository.save(marketRate); // Save will update if the customer already exists
-    }
-
-	@Override
 	public void deleteContact(int id) {
 		contactusRepository.deleteById(id);
 		
@@ -90,6 +85,12 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public void deleteProduct(int id) {
 		 productRepository.deleteById(id);
+		
+	}
+
+	@Override
+	public void deleteMarketrate(int id) {
+		marketRateRepository.deleteById(id);
 		
 	}
 

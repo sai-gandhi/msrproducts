@@ -6,12 +6,12 @@
 </head>
 <body>
     <h2>View All Market Prices</h2>
-    <a href="home.jsp">Back to home</a>
+    <a href="adminhome.jsp">Back to home</a>
     
     <table border="1">
         <thead>
             <tr>
-                <th>Customer ID</th>
+                <th>Product ID</th>
                 <th>Product Name</th>
                 <th>Date</th>
                 <th>Maximum Price</th>
@@ -29,7 +29,7 @@
                     <td>${marketrate.maxrate}</td>
                     <td>${marketrate.avgrate}</td>
                     <td>${marketrate.minrate}</td>
-                    <td><a href="<c:url value='/updaterate/${marketrate.id}' />">Update</a> </td>
+                    <td><a href="<c:url value='/deletemarketrate?id=${marketrate.id}' />">Delete</a> </td>
 
                 </tr>
             </c:forEach>

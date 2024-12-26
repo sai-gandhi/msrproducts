@@ -11,7 +11,7 @@
     <table border="1">
         <thead>
             <tr>
-                <th>Product ID</th>
+                
                 <th>Name</th>
                 <th>Cost</th>
                 <th>Description</th>
@@ -21,7 +21,7 @@
         <tbody>
             <c:forEach var="product" items="${products}">
                 <tr>
-                    <td>${product.id}</td>
+                   
                     <td>${product.name}</td>
                     <td>${product.cost}</td>
                     <td>${product.description}</td>
