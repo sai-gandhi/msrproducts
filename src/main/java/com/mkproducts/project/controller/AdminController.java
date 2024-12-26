@@ -6,14 +6,13 @@ import java.io.IOException;
 
 
 
+
 import java.io.OutputStream;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -34,6 +33,7 @@ import com.mkproducts.project.service.CustomerService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class AdminController {
@@ -69,33 +69,36 @@ public class AdminController {
 	
 	@GetMapping("adminhome")
 	public ModelAndView adminhome(HttpServletRequest request) {
-		
-		ModelAndView mv=new ModelAndView();
-		Admin admin =(Admin)request.getSession().getAttribute("admin");
-		if (admin != null) {
-			mv.setViewName("adminhome");
-		}
-		else {
-			mv.setViewName("adminlogin");
-		}
-	   return mv;
+	    ModelAndView mv = new ModelAndView();
+	    
+	    // Check session and admin attribute
+	    HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
+	    if (session != null) {
+	        Admin admin = (Admin) session.getAttribute("admin");
+	        if (admin != null) {
+	            mv.setViewName("adminhome");
+	            return mv;
+	        }
+	    }
+	    else {
+	    mv.setViewName("adminlogin");
+	    }
+	    return mv;
 	}
+
 	
 
+	// To add the product information
 	@GetMapping("addproduct")
 	public ModelAndView addproduct(HttpServletRequest request) {
-		ModelAndView mv=new ModelAndView();
-		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		if(admin!=null) {
+		ModelAndView mv = new ModelAndView();
+
 		mv.setViewName("addproduct");
-		}
-		else {
-			mv.setViewName("adminlogin");
-		}
+
 		return mv;
 	}
 	
-	
+	//To insert or save  a product data
 	@PostMapping("insertproduct")
 	public ModelAndView insertproduct(HttpServletRequest request, @RequestParam("image") MultipartFile file) throws IOException, SerialException, SQLException {
 	    ModelAndView mv = new ModelAndView();
@@ -117,18 +120,15 @@ public class AdminController {
 	    return mv;
 	}
 	
+	//To Display the all the products 
 	@GetMapping("viewallproducts")
 	public ModelAndView viewallproducts(HttpServletRequest request) {
-		ModelAndView mv=new ModelAndView();
-		Admin admin=(Admin)request.getSession().getAttribute("admin");
-		if(admin!=null) {
+		ModelAndView mv = new ModelAndView();
+
 		mv.setViewName("viewallproducts");
-		List<Product> products=adminService.viewAllProduct();
+		List<Product> products = adminService.viewAllProduct();
 		mv.addObject("products", products);
-		}
-		else {
-			mv.setViewName("adminlogin");
-		}
+
 		return mv;
 	}
 
@@ -143,19 +143,17 @@ public class AdminController {
 	            }
 	        }
 	    }
+	 
+	 
+		// To display the contact information which filled by the customers
+		@GetMapping("viewallcontacts")
+		public ModelAndView viewallcontacts() {
+			ModelAndView mv = new ModelAndView();
 
-	 @GetMapping("viewallcontacts")
-		public ModelAndView viewallcontacts(HttpServletRequest request) {
-			ModelAndView mv=new ModelAndView();
-			Admin admin=(Admin)request.getSession().getAttribute("admin");
-			if(admin!=null) {
 			mv.setViewName("viewallcontacts");
-			List<Contactus> contacts=adminService.viewAllContacts();
+			List<Contactus> contacts = adminService.viewAllContacts();
 			mv.addObject("contacts", contacts);
-			}
-			else {
-				mv.setViewName("adminlogin");
-			}
+
 			return mv;
 		}
 
@@ -171,18 +169,18 @@ public class AdminController {
 		        }
 		    }	 
 	 
+		 
+		    // To Add the market rates variables : product name, max price, avg price, min price ext....
 			@GetMapping("addrates")
-			public ModelAndView addrates(HttpServletRequest request) {
-				Admin admin = (Admin) request.getSession().getAttribute("admin");
+			public ModelAndView addrates() {
+
 				ModelAndView mv = new ModelAndView();
-				if (admin != null) {
-					mv.setViewName("addrates");
-				} else {
-					mv.setViewName("adminlogin");
-				}
+
+				mv.setViewName("addrates");
 				return mv;
 			}
-		 
+
+			//to save the market rates
 		 @PostMapping("saveprices")
 			public ModelAndView saveprices(HttpServletRequest request) {
 			    ModelAndView mv = new ModelAndView();
@@ -209,56 +207,41 @@ public class AdminController {
 			}
 		 
 		 
+		 //To view all the market rates 
 		 @GetMapping("viewadminmarketrate")
-			public ModelAndView viewadminmarketrate(HttpServletRequest request) {
+			public ModelAndView viewadminmarketrate() {
 				ModelAndView mv=new ModelAndView();
-				Admin admin=(Admin)request.getSession().getAttribute("admin");
-				if(admin!=null) {
+				
 				mv.setViewName("viewadminmarketrate");
 				List<MarketRate> marketrates=customerService.viewAllRates();
 				mv.addObject("marketrates", marketrates);
-				}else {
-					mv.setViewName("adminlogin");
-				}
 				return mv;
 			}
 		 
 	
-		 
-		 @GetMapping("updaterate/{id}")
-		  public ModelAndView showUpdateRateForm(@PathVariable("id") int id , HttpServletRequest request) {
-		      ModelAndView mv = new ModelAndView();
-		      Admin admin=(Admin)request.getSession().getAttribute("admin");
-		      if(admin!=null) {
-		      MarketRate marketRate = adminService.displayProductById(id);
-		      mv.addObject("marketRate", marketRate);
-		      mv.setViewName("updaterate"); // View for the update form
-		      }else {
-		    	  mv.setViewName("adminlogin");
-		      }
-		      return mv;
-		  }
-		 
-		 
-		  @PostMapping("updaterate")
-		  public ModelAndView updateRate(@ModelAttribute("marketRate") MarketRate marketRate) {
-		      adminService.updateRate(marketRate);
-		      ModelAndView mv = new ModelAndView("redirect:/viewadminmarketrate");
-		      return mv;
-		  }
+		 // To delete the market rate by using the id
+		 @GetMapping("deletemarketrate")
+		 public String marketratedelete(@RequestParam int id) {
+			 adminService.deleteMarketrate(id);
+			 return "redirect:/viewadminmarketrate";
+		 }
 		  
 		  
+		 // To delete the contact information by using the id number 
 		  @GetMapping("delete")
 		  public String delete(@RequestParam int id) {
 			  adminService.deleteContact(id);
 			  return "redirect:/viewallcontacts";
 		  }
 		  
+		  //To delete the product by using product id
 		  @GetMapping("productdelete")
 		  public String productdelete(@RequestParam int id) {
 			  adminService.deleteProduct(id);
 			  return "redirect:/viewallproducts";
 		  }
+		  
+		  
 		  
 		  
 }

@@ -8,27 +8,25 @@ import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Product;
 
 public interface AdminService {
-	public Admin checkAdminLogin(String name,String password);
-	
-	
+	public Admin checkAdminLogin(String name, String password);
+
 	public String addProduct(Product product);
+
 	public List<Product> viewAllProduct();
+
 	public Product displayProductiById(int id);
 
-	
 	public List<Contactus> viewAllContacts();
-	public Contactus displayImageById(int id);
 
+	public Contactus displayImageById(int id);
 
 	public String addRates(MarketRate r);
 
-
 	public MarketRate displayProductById(int id);
-	public MarketRate updateRate(MarketRate marketRate);
-
 
 	public void deleteContact(int id);
 
-
 	public void deleteProduct(int id);
+
+	public void deleteMarketrate(int id);
 }

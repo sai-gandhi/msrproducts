@@ -7,9 +7,9 @@
 <title>Admin Navbar</title>
 </head>
 <body>
-<h2 align="center">MSR Products</h2>
+<h2 align="center">MSR Services</h2>
 <a href="adminhome">Home</a>&nbsp;&nbsp;
-<a href="#">View All Customers</a>&nbsp;&nbsp;
+<a href="viewallcustomers">View All Customers</a>&nbsp;&nbsp;
 <a href="addproduct">Add product</a>&nbsp;&nbsp;
 <a href="viewallproducts">View All products</a>&nbsp;&nbsp;
 <a href="addrates">Add Market Rates</a>&nbsp;&nbsp;
