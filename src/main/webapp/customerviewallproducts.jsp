@@ -14,6 +14,7 @@
                 
                 <th>Name</th>
                 <th>Cost</th>
+                <th>Product Available</th>
                 <th>Description</th>
                 <th>Image</th>
             </tr>
@@ -24,6 +25,7 @@
                    
                     <td>${product.name}</td>
                     <td>${product.cost}</td>
+                    <td>${product.productcount }</td>
                     <td>${product.description}</td>
 
                     <td>

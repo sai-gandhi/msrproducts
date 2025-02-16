@@ -43,23 +43,28 @@ cursor:pointer;
 <title>Add Product</title>
 </head>
 <body align="center">
-	<h2>Add Product</h2>
-	<form method="post" action="insertproduct"
-		enctype="multipart/form-data">
-		<div class="body1">
-			<label>Product Name:</label> <input type="text"
-				placeholder="Enter Product Name." required="required" name="name"><br>
-			<br> <label>Product Cost:</label> <input type="text"
-				placeholder="Enter Product Cost." required="required" name="cost"><br>
-			<br> <label>Product Description:</label> <input type="text"
-				placeholder="Enter Product Description." required="required"
-				name="description"><br>
-			<br> <label>Product Image:</label> <input type="file"
-				required="required" name="image"><br>
-			<br> <input class="button2" type="submit" value="Add Product" />&nbsp;&nbsp;
-			 <input class="button2" type="reset" value="clear" />&nbsp;&nbsp;
-		</div>
-	</form>
-
+    <h2>Add Product</h2>
+    <form method="post" action="insertproduct" enctype="multipart/form-data">
+        <div class="body1">
+            <label for="name">Product Name:</label> 
+            <input type="text" id="name" placeholder="Enter Product Name." required name="name"><br>
+            <br>
+            <label for="cost">Product Cost:</label> 
+            <input type="number" id="cost" placeholder="Enter Product Cost." required name="cost"><br>
+            <br>
+            <label for="productcount">Product Count:</label>
+            <input type="number" id="productcount" required placeholder="Enter Product count" name="productcount"/><br>
+            <br>
+            <label for="description">Product Description:</label>
+            <textarea id="description" rows="4" cols="50" placeholder="Enter Product Description." required name="description"></textarea><br>
+            <br>
+            <label for="image">Product Image:</label>
+            <input type="file" id="image" required name="image"><br>
+            <br>
+            <input class="button2" type="submit" value="Add Product" />&nbsp;&nbsp;
+            <input class="button2" type="reset" value="Clear" />&nbsp;&nbsp;
+        </div>
+    </form>
 </body>
+
 </html>

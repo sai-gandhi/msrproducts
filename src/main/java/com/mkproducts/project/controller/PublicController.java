@@ -13,7 +13,9 @@ import com.mkproducts.project.model.Product;
 public class PublicController {
 	
 	
-	@GetMapping("")
+	
+	
+	@GetMapping("/home")
 	public ModelAndView home(){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("home");

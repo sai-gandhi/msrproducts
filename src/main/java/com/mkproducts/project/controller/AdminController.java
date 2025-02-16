@@ -104,6 +104,7 @@ public class AdminController {
 	    ModelAndView mv = new ModelAndView();
 	    String productname = request.getParameter("name"); 
 	    double productCost = Double.parseDouble(request.getParameter("cost"));
+	    int productcount=Integer.parseInt(request.getParameter("productcount"));
 	    String productDescription = request.getParameter("description");
 	    byte[] bytes = file.getBytes();
 	    Blob blob=new javax.sql.rowset.serial.SerialBlob(bytes);
@@ -111,6 +112,7 @@ public class AdminController {
 	    Product p = new Product();
 	    p.setCost(productCost);
 	    p.setName(productname);
+	    p.setProductcount(productcount);
 	    p.setDescription(productDescription);
 	    p.setImage(blob); // Directly set the byte array
 	    
@@ -241,6 +243,13 @@ public class AdminController {
 			  return "redirect:/viewallproducts";
 		  }
 		  
+		  
+		  @GetMapping("updateproduct")
+		  public ModelAndView updateproduct() {
+			  ModelAndView mv=new ModelAndView();
+			  mv.setViewName("updateproduct");
+			  return mv;
+		  }
 		  
 		  
 		  
