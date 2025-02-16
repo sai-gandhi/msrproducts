@@ -18,12 +18,19 @@ public class Product {
 	@GeneratedValue(strategy = GenerationType.IDENTITY )
 	@Column(name="product_id", nullable = false,length=100)
 	private int id;
+	
 	@Column(name="product_name", nullable = false,length=55)
 	private String name;
+	
 	@Column(name="product_cost", nullable = false,length=20)
 	private double cost;
-	@Column(name="product_description", nullable = false,length=200)
+	
+	@Column(name="product count",nullable = false,length=10)
+	private int productcount;
+	
+	@Column(name="product_description", nullable = false,length=2000)
 	private String description;
+	
 	@Column(name="product_image", nullable = false)
 	private Blob image;
 	
@@ -33,24 +40,35 @@ public class Product {
 	public void setId(int id) {
 		this.id = id;
 	}
+	
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
+	
 	public double getCost() {
 		return cost;
 	}
 	public void setCost(double cost) {
 		this.cost = cost;
 	}
+	
+	public int getProductcount() {
+		return productcount;
+	}
+	public void setProductcount(int productcount) {
+		this.productcount = productcount;
+	}
+	
 	public Blob getImage() {
 		return image;
 	}
 	public void setImage(Blob image) {
 		this.image = image;
 	}
+	
 	public String getDescription() {
 		return description;
 	}

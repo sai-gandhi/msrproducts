@@ -20,7 +20,7 @@
 <label>Location:</label>
 <input type="text" placeholder="Enter Your Location" name="location" required="required"/><br><br>
 <label>Contact:</label>
-<input type="text" placeholder="Enter Contact number" name="contact" required="required"/><br><br>
+<input type="text" placeholder="Enter Contact number" name="contact" maxlength="10" minlength="10" pattern="\d{10}" required="required"/><br><br>
 <button type="submit" >Register</button>&nbsp;&nbsp;
 <button type="reset" >Clear</button>&nbsp;&nbsp;
 <p>if you already a user?<a href="customerlogin.jsp"> login here</a></p>
