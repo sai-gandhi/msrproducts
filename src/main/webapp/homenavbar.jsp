@@ -48,7 +48,9 @@ color:green;
 <a href="marketrates" class="button">Market Rate's</a>&nbsp;&nbsp;
 <a href="customerlogin" class="button">Customer Login</a>&nbsp;&nbsp;
 <a href="customerregister" class="button">Customer Register</a>&nbsp;&nbsp;
-<a href="adminlogin" class="button">Admin Login</a>&nbsp;&nbsp;
+ <a href="adminlogin" class="button">Admin Login</a>&nbsp;&nbsp; 
+
+
 </div>
 </div>
 

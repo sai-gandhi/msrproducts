@@ -6,8 +6,11 @@
 
 <meta charset="UTF-8">
 <style>
-.note {
+p {
 	color: red;
+}
+a{
+color:red;
 }
 
 title {

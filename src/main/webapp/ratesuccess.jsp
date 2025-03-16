@@ -13,6 +13,7 @@ background-color: gray;
 </head>
 <body>
 <h3>Product Rate added successfully</h3>
-<a href="viewadminmarketrate">See the Market Rates</a>
+<a href="viewadminmarketrate">See the Market Rates</a>&nbsp;&nbsp;
+<a href="addrates.jsp">Add Product Rate</a>
 </body>
 </html>
