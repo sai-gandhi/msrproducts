@@ -53,7 +53,7 @@ justify-content: space-around;
 <h2><u>About Us</u></h2>
 <div class="founder-image">
 <h4> Uppalapati MadhuSudhan Rao</h4>
-<img src="/images/founder2.png" alt="founder">
+<img src="/images/founder.png" alt="founder">
 </div>
 <h3>Welcome to MSR Products</h3><p>a trusted name in the agricultural products industry for over six years.</p>
 <p>Founded and managed by Uppalapati MadhuSudhan Rao and Uppalapati Krishnaveni, Established in 2019, our mission is to support farmers and customers alike by providing high-quality agricultural products and facilitating fair trade.</p>
