@@ -28,5 +28,16 @@ The Smart Farming Assistance System is a web-based platform designed to help far
 --------------------------------------------------------------
 
 
+🛠️ Future Enhancements
+✅ Add multi-language support
+✅ Improve UI/UX for better user experience
+✅ Introduce push notifications for daily price updates
+
+
+📧 Contact
+For any questions or feedback, reach out via the Contact Us form or email at:
+📩 saichows63@gmail.com || 2200032934cseh@gmail.com
+
+
 
 
