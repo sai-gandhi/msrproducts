@@ -42,7 +42,7 @@ color:green;
 <div class="navbar">
 <h2>MSR Products</h2>
 <div class="homenavbar" align="center">
-<a href="home" class="button">Home</a>&nbsp;&nbsp;
+<a href="home.jsp" class="button">Home</a>&nbsp;&nbsp;
 <a href="aboutus" class="button">About Us</a>&nbsp;&nbsp;
 <a href="contactus" class="button">Contact Us</a>&nbsp;&nbsp;
 <a href="marketrates" class="button">Market Rate's</a>&nbsp;&nbsp;
