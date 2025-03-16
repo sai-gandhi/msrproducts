@@ -15,7 +15,7 @@ public class PublicController {
 	
 	
 	
-	@GetMapping("/home")
+	@GetMapping("")
 	public ModelAndView home(){
 		ModelAndView mv=new ModelAndView();
 		mv.setViewName("home");
