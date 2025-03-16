@@ -87,12 +87,18 @@ Read more at </h4>
 
  <div class="marquee-container">
         <div class="marquee-content">
-            <img src="/images/1.png" alt="Image 1">
-            <img src="/images/2.png" alt="Image 2">
-            <img src="/images/3.png" alt="Image 3">
-            <img src="/images/4.png" alt="Image 4">
+             <img src="/images/1.png" alt="Image 1">
+             <img src="/images/2.png" alt="Image 2">
+             <img src="/images/3.png" alt="Image 3">
+             <img src="/images/4.png" alt="Image 4">
              <img src="/images/5.png" alt="Image 5">
-              <img src="/images/6.png" alt="Image 6">
+             <img src="/images/6.png" alt="Image 6">
+             <img src="/images/1.png" alt="Image 1">
+             <img src="/images/2.png" alt="Image 2">
+             <img src="/images/3.png" alt="Image 3">
+             <img src="/images/4.png" alt="Image 4">
+             <img src="/images/5.png" alt="Image 5">
+             <img src="/images/6.png" alt="Image 6">
         </div>
     </div>
 
