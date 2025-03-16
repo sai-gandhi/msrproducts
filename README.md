@@ -28,7 +28,7 @@ The Smart Farming Assistance System is a web-based platform designed to help far
 --------------------------------------------------------------
 
 
-🛠️ Future Enhancements
+🛠️ Future Enhancements: 
 ✅ Add multi-language support
 ✅ Improve UI/UX for better user experience
 ✅ Introduce push notifications for daily price updates
