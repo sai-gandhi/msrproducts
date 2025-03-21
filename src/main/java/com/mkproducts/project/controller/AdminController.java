@@ -69,22 +69,13 @@ public class AdminController {
 	
 	@GetMapping("adminhome")
 	public ModelAndView adminhome(HttpServletRequest request) {
-	    ModelAndView mv = new ModelAndView();
-	    
-	    // Check session and admin attribute
-	    HttpSession session = request.getSession(false); // Don't create a new session if it doesn't exist
-	    if (session != null) {
-	        Admin admin = (Admin) session.getAttribute("admin");
-	        if (admin != null) {
-	            mv.setViewName("adminhome");
-	            return mv;
-	        }
-	    }
-	    else {
-	    mv.setViewName("adminlogin");
-	    }
-	    return mv;
+		Admin admin=(Admin) request.getSession().getAttribute("admin");
+		if(admin==null) {
+			return new ModelAndView("redirect:/adminlogin");
+		}
+		return new ModelAndView("adminhome");
 	}
+	   
 
 	
 

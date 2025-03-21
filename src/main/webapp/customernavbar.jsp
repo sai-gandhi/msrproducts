@@ -7,9 +7,13 @@
 <title>Customer home</title>
 </head>
 <body>
-<h2 align="center">MSR Products</h2>
+<div class="customernavbar">
+<h2 align="left">MSR Products</h2>
+<a align="right" href="customerlogin">Logout</a>&nbsp;&nbsp;
+</div>
+
 <a href="customerhome">Home</a>&nbsp;&nbsp;
 <a href="customerviewallproducts">View Products</a>&nbsp;&nbsp;
-<a href="customerlogin">Logout</a>&nbsp;&nbsp;
+
 </body>
 </html>

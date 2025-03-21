@@ -50,17 +50,30 @@ public class CustomerController {
 	}
 	
 	@GetMapping("customerhome")
-	public ModelAndView customerhome(HttpServletRequest request) {
-		ModelAndView mv=new ModelAndView();
-		Customer customer = (Customer)request.getSession().getAttribute("customer");
-		if(customer!=null) {
-			mv.setViewName("customerhome");
-		}
-		else {
-			mv.setViewName("customerlogin");
-		}
-		return mv;
+	public ModelAndView customerhome(HttpServletRequest request, HttpServletResponse response) {
+	    HttpSession session = request.getSession(false);
+
+	    // Disable browser caching
+	    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+	    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+	    response.setDateHeader("Expires", 0); // Proxies
+
+	    if (session == null || session.getAttribute("customer") == null) {
+	        return new ModelAndView("redirect:/customerlogin"); // Redirect to login page if session expired
+	    }
+	    return new ModelAndView("customerhome");
 	}
+
+	@GetMapping("logout")
+	public ModelAndView logout(HttpServletRequest request) {
+	    HttpSession session = request.getSession(false);
+	    if (session != null) {
+	        session.invalidate(); // Destroy session
+	    }
+	    return new ModelAndView("redirect:/customerlogin"); // Always redirect to login
+	}
+
+
 	
 	 @PostMapping("checkcustomerlogin")
 	  public ModelAndView checkadminlogin(HttpServletRequest request)
