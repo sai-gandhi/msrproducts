@@ -23,6 +23,12 @@ setTimeout(function() {
 <h3>Welcome Customer</h3>
 </div>
 
+<div class="video-container">
+<video width="100%"   controls >
+    <source src="/videos/people-hands-shake.webm" type="video2/mp4">
+  </video>
+
+</div>
 
 
 </body>

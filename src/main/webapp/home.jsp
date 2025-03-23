@@ -76,6 +76,12 @@ background-repeat: repeat-x;
 <h4>Agriculture is not crop production as popular belief holds - it's the production of food and fiber from the world's land and waters. Without agriculture it is not possible to have a city, stock market, banks, university, church or army. Agriculture is the foundation of civilization and any stable economy.
 Read more at </h4>
 </div>
+
+<div class="video-container">
+  <video width="80%" height="10%" autoplay controls >
+    <source src="/videos/stock-footage-growing.webm" type="video1/mp4">
+  </video>
+</div>
 <div class="image1">
 <img id="image1" src="/images/plants.png" alt="Plants Image">
 </div>
