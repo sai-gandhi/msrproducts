@@ -1,6 +1,7 @@
 package com.mkproducts.project.controller;
 
 import java.io.IOException;
+
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -21,6 +22,7 @@ import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.Product;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.service.CustomerService;
+import com.mkproducts.project.model.Feedback;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -119,6 +121,15 @@ public class CustomerController {
 		 
 	 }
 	 
+	 
+	 @GetMapping("feedback")
+		public ModelAndView feedback() {
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("feedback");
+			return mv;
+		}
+	 
+	 
 	 @PostMapping("savecontactinformation")
 	public ModelAndView savecontactinformation(HttpServletRequest request, @RequestParam("uimage") MultipartFile file) throws IOException, SerialException, SQLException {
 		    ModelAndView mv = new ModelAndView();
@@ -143,6 +154,27 @@ public class CustomerController {
 		    mv.addObject("message", message);
 		    return mv;
 		}
+	 
+	 @PostMapping("savefeedbackform")
+	 public ModelAndView savefeedbackform(HttpServletRequest request) {
+		 ModelAndView mv=new ModelAndView();
+		 String name=request.getParameter("customer-name");
+		 String contact=request.getParameter("contact");
+		 String products=request.getParameter("product-name");
+		 String crop=request.getParameter("crop-name");
+		 String userstory=request.getParameter("user-story");
+		 Feedback feedback=new Feedback();
+		 feedback.setName(name);
+		 feedback.setContact(contact);
+		 feedback.setProducts(products);
+		 feedback.setCrop(crop);
+		 feedback.setUserstory(userstory);
+		 
+		 String message = customerService.addFeedback(feedback);
+		    mv.setViewName("feedbacksuccess");
+		    mv.addObject("message", message);
+		    return mv;
+	 }
 	 
 	 @GetMapping("marketrates")
 		public ModelAndView marketrates() {

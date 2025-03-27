@@ -4,15 +4,18 @@
 <head>
  <style>
 marquee {
-	
-	size:20px;
+	text-shadow: 2px 2px 4px orange;
+	font-size:20px;
 	color:red;
 }
 
-
+table{
+width: 100%;
+ border-collapse: collapse;
+}
 
 h4 {
-	color: green;
+	color: red;
 }
 
 h3 {
@@ -29,10 +32,19 @@ a {
 
 th {
 	color: red;
+	background-color: lightpink;
+	padding:10px;
+	text-align:center;
+	border:1px solid black;
 }
 
+
 td {
-	color: green;
+    color: green;
+    background-color: lightgray;
+    padding: 10px;
+    text-align: center;
+    border: 1px solid black;
 }
 
  .marquee-container {
@@ -70,7 +82,7 @@ td {
     <br><br>
     <marquee>Note: Changes in prices come from shifts in market supply, market demand, or both.</marquee>
     <h3>Markets of</h3>
-    <h4>Khammam, Enkoor</h4>
+    <h4> Khammam, Enkoor</h4>
     <table border="1">
         <thead>
             <tr>

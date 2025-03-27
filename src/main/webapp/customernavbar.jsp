@@ -14,6 +14,7 @@
 
 <a href="customerhome">Home</a>&nbsp;&nbsp;
 <a href="customerviewallproducts">View Products</a>&nbsp;&nbsp;
+<a href="feedback">Feedback</a>&nbsp;&nbsp;
 
 </body>
 </html>

@@ -7,10 +7,12 @@ import org.springframework.stereotype.Service;
 
 import com.mkproducts.project.model.Contactus;
 import com.mkproducts.project.model.Customer;
+import com.mkproducts.project.model.Feedback;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Product;
 import com.mkproducts.project.repository.ContactusRepository;
 import com.mkproducts.project.repository.CustomerRepository;
+import com.mkproducts.project.repository.FeedbackRepository;
 import com.mkproducts.project.repository.MarketRateRepository;
 import com.mkproducts.project.repository.ProductRepository;
 
@@ -27,6 +29,9 @@ public class CustomerServiceImpl implements CustomerService{
 	
 	@Autowired
 	private MarketRateRepository marketRateRepository;
+	
+	@Autowired
+	private FeedbackRepository feedbackRepository;
 
 	@Override
 	public Customer checkCustomerLogin(String email, String password) {
@@ -59,6 +64,13 @@ public class CustomerServiceImpl implements CustomerService{
 	@Override
 	public Product displayProductiByIds(int id) {
 		return productRepository.findById(id).get();
+	}
+
+	@Override
+	public String addFeedback(Feedback c) {
+		feedbackRepository.save(c);
+		
+		return "Feedback is saved";
 	}
 
 }
