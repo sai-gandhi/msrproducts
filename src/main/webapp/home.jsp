@@ -164,11 +164,11 @@ Read more at </h4>
     
 
 
-<div class="video-container">
+<!-- <div class="video-container">
   <video width="80%" height="10%" autoplay controls >
     <source src="/videos/stock-footage-growing.webm" type="video1/mp4">
   </video>
-</div>
+</div> -->
 <div class="image1">
 <img id="image1" src="/images/plants.png" alt="Plants Image">
 </div>

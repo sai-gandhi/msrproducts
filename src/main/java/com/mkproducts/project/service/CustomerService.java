@@ -26,6 +26,12 @@ public interface CustomerService {
 
 	Product displayProductiByIds(int id);
 
+	List<Feedback> getAllFeedbacks();
+	
+	Feedback getFeedbackById(int id);
+
+	
+
 
 
 }

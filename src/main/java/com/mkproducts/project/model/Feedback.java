@@ -1,5 +1,7 @@
 package com.mkproducts.project.model;
 
+import java.sql.Blob;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -26,7 +28,16 @@ public class Feedback {
 	@Column(name="userstory",nullable = false,length = 500)
 	private String userstory;
 	
+	@Column(name="product_image", nullable = false)
+	private Blob image;
 	
+	
+	public int getId() {
+		return id;
+	}
+	public void setId(int id) {
+		this.id = id;
+	}
 	public String getName() {
 		return name;
 	}
@@ -57,5 +68,12 @@ public class Feedback {
 	public void setUserstory(String userstory) {
 		this.userstory = userstory;
 	}
+	public Blob getImage() {
+		return image;
+	}
+	public void setImage(Blob image) {
+		this.image = image;
+	}
+	
 
 }

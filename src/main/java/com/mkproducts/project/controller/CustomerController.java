@@ -2,6 +2,7 @@ package com.mkproducts.project.controller;
 
 import java.io.IOException;
 
+
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -27,6 +28,8 @@ import com.mkproducts.project.model.Feedback;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import org.springframework.ui.Model;
+
 
 @Controller
 public class CustomerController {
@@ -122,12 +125,7 @@ public class CustomerController {
 	 }
 	 
 	 
-	 @GetMapping("feedback")
-		public ModelAndView feedback() {
-			ModelAndView mv=new ModelAndView();
-			mv.setViewName("feedback");
-			return mv;
-		}
+	
 	 
 	 
 	 @PostMapping("savecontactinformation")
@@ -155,26 +153,62 @@ public class CustomerController {
 		    return mv;
 		}
 	 
+	
+	 @GetMapping("feedback")
+		public ModelAndView feedback() {
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("feedback");
+			return mv;
+		}
+	 
 	 @PostMapping("savefeedbackform")
-	 public ModelAndView savefeedbackform(HttpServletRequest request) {
+	 public ModelAndView savefeedbackform(HttpServletRequest request, @RequestParam("image") MultipartFile file) throws IOException, SerialException, SQLException {
 		 ModelAndView mv=new ModelAndView();
 		 String name=request.getParameter("customer-name");
 		 String contact=request.getParameter("contact");
 		 String products=request.getParameter("product-name");
 		 String crop=request.getParameter("crop-name");
 		 String userstory=request.getParameter("user-story");
+		 byte[] bytes = file.getBytes();
+		 Blob blob=new javax.sql.rowset.serial.SerialBlob(bytes);
+		 
 		 Feedback feedback=new Feedback();
 		 feedback.setName(name);
 		 feedback.setContact(contact);
 		 feedback.setProducts(products);
 		 feedback.setCrop(crop);
 		 feedback.setUserstory(userstory);
+		 feedback.setImage(blob);
 		 
 		 String message = customerService.addFeedback(feedback);
 		    mv.setViewName("feedbacksuccess");
 		    mv.addObject("message", message);
 		    return mv;
 	 }
+	 
+	 
+
+	 
+	 @GetMapping("viewfeedback")
+		public ModelAndView viewafeedback() {
+			ModelAndView mv=new ModelAndView();
+			mv.setViewName("viewfeedback");
+			List<Feedback> feedback=customerService.getAllFeedbacks();
+			mv.addObject("feedbacks", feedback);
+			return mv;
+		}
+
+	    @GetMapping("displayfeedbackimage")
+	    public void displayFeedbackImage(@RequestParam int id, HttpServletResponse response) throws IOException, SQLException {
+	        Feedback feedback = customerService.getFeedbackById(id);
+	        if (feedback != null && feedback.getImage() != null) {
+	            byte[] imageBytes = feedback.getImage().getBytes(1, (int) feedback.getImage().length());
+	            response.setContentType("image/jpeg");
+	            try (OutputStream out = response.getOutputStream()) {
+	                out.write(imageBytes);
+	            }
+	        }
+	    }
 	 
 	 @GetMapping("marketrates")
 		public ModelAndView marketrates() {
@@ -206,4 +240,11 @@ public class CustomerController {
 		        }
 		    }
 
+		 @GetMapping("crop_details")
+			public ModelAndView crop_details() {
+				ModelAndView mv=new ModelAndView();
+				mv.setViewName("crop_details");
+				return mv;
+			}
+		 
 }

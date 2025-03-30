@@ -73,4 +73,18 @@ public class CustomerServiceImpl implements CustomerService{
 		return "Feedback is saved";
 	}
 
+	@Override
+	public List<Feedback> getAllFeedbacks() {
+		
+		return feedbackRepository.findAll();
+	}
+
+	@Override
+	public Feedback getFeedbackById(int id) {
+		
+		return feedbackRepository.findById(id).get();
+	}
+
+	
+
 }
