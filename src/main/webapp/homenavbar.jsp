@@ -7,6 +7,7 @@
 navbar{
 background-color: red;
 }
+
 .homenavbar{
 align-content:center;
 background-color: red;

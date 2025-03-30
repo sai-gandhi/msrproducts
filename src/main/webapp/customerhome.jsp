@@ -17,10 +17,11 @@ setTimeout(function() {
 
 <body>
 <%@include file="customernavbar.jsp" %>
+<img align="middle" src="images/customerhome.png" alt="Customer Home" style="width:75%; height:auto;">
+
 
 <div>
 
-<h3>Welcome Customer</h3>
 </div>
 
 <!-- <div class="video-container">

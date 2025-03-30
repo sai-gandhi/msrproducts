@@ -8,7 +8,8 @@
 <style>
     body {
         font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
+        background: url('/images/feedback.png') no-repeat center center fixed;
+        background-size: cover;
         margin: 0;
         padding: 0;
         display: flex;
