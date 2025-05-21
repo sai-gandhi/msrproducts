@@ -46,6 +46,8 @@ body {
     background-color: #555;
 }
 
+
+
 /* Navigation Links */
 body a {
     display: inline-block;
@@ -63,12 +65,14 @@ body a {
 body a:hover {
     background-color: #bbb;
 }
+
+
 </style>
 </head>
 <body>
 <div class="customernavbar">
     <h2 align="left">MSR Products</h2>
-    <a align="right" href="customerlogin">Logout</a>
+    <a class="logout-button" align="right" href="customerlogin">Logout</a>
 </div>
 
 <a href="customerhome">Home</a>&nbsp;&nbsp;

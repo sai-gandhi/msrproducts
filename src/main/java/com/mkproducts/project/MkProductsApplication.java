@@ -8,6 +8,8 @@ public class MkProductsApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(MkProductsApplication.class, args);
+		System.out.println("MSR Products is ready to use........!");
+		
 	}
 
 }

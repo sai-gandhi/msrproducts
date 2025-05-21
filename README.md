@@ -13,7 +13,8 @@ The Smart Farming Assistance System is a web-based platform designed to help far
 
 ### 🛒 **For Customers:**
 - **Product Availability:** Check availability of agricultural products and fertilizers.  
-- **Market Insights:** Gain insights into market trends and product pricing.  
+- **Market Insights:** Gain insights into market trends and product pricing.
+ 
 
 ---
 

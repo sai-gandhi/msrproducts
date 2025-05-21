@@ -220,7 +220,7 @@ public class CustomerController {
 		}
 	 
 	 @GetMapping("customerviewallproducts")
-		public ModelAndView viewallproducts() {
+		public ModelAndView viewallproducts(HttpServletRequest request, HttpServletResponse response) {
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("customerviewallproducts");
 			List<Product> products=customerService.viewAllProducts();
@@ -240,11 +240,20 @@ public class CustomerController {
 		        }
 		    }
 
+		 
 		 @GetMapping("crop_details")
-			public ModelAndView crop_details() {
-				ModelAndView mv=new ModelAndView();
-				mv.setViewName("crop_details");
-				return mv;
+		 public ModelAndView crop_details(HttpServletRequest request, HttpServletResponse response) {
+			    HttpSession session = request.getSession(false);
+
+			    // Disable browser caching
+			    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
+			    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+			    response.setDateHeader("Expires", 0); // Proxies
+
+			    if (session == null || session.getAttribute("customer") == null) {
+			        return new ModelAndView("redirect:/customerlogin"); // Redirect to login page if session expired
+			    }
+			    return new ModelAndView("crop_details");
 			}
 		 
 }

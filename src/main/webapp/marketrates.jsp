@@ -2,52 +2,131 @@
 <!DOCTYPE html>
 <html>
 <head>
- <style>
-marquee {
-	text-shadow: 2px 2px 4px orange;
-	font-size:20px;
-	color:red;
-}
+    <meta charset="UTF-8">
+    <title>Market Prices</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            
+        }
 
-table{
-width: 100%;
- border-collapse: collapse;
-}
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
 
-h4 {
-	color: red;
-}
+        h2 {
+            color: #2c3e50;
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 28px;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
 
-h3 {
-	color: blue;
-}
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
 
-h2 {
-	color: blue;
-}
+        .back-link:hover {
+            color: #2980b9;
+            text-decoration: underline;
+        }
 
-a {
-	color: red;
-}
+        .market-notice {
+            background-color: lightgreen;
+            padding: 15px;
+            border-left: 4px solid #ffc107;
+            margin: 20px 0;
+            font-size: 16px;
+            color: red;
+            border-radius: 0 4px 4px 0;
+        }
 
-th {
-	color: red;
-	background-color: lightpink;
-	padding:10px;
-	text-align:center;
-	border:1px solid black;
-}
+        .market-header {
+            text-align: center;
+            margin: 20px 0;
+        }
 
+        .market-header h3 {
+            color: #3498db;
+            margin-bottom: 5px;
+        }
 
-td {
-    color: green;
-    background-color: lightgray;
-    padding: 10px;
-    text-align: center;
-    border: 1px solid black;
-}
+        .market-header h4 {
+            color: #e74c3c;
+            margin-top: 0;
+        }
 
- .marquee-container {
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        th {
+            background-color: #3498db;
+            color: white;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 14px;
+            letter-spacing: 0.5px;
+        }
+
+        td {
+            padding: 12px;
+            text-align: center;
+            border-bottom: 1px solid #e0e0e0;
+            color: #2c3e50;
+        }
+     
+        tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        tr:hover {
+            background-color: lightgray;
+             transform:translateY(-5px);
+        }
+
+        .marquee-container {
+            width: 100%;
+            overflow: hidden;
+            white-space: nowrap;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+            margin-top: 30px;
+        }
+
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .marquee-container {
             width: 100%;
             overflow: hidden;
             white-space: nowrap;
@@ -67,58 +146,108 @@ td {
                 transform: translateX(-50%);
             }
         }
+        
+        .product-name{
+        font-weight:bold;
+        color:black;
+        }
 
-        img {
-            width: 200px;
-            height: auto;
-            margin: 0 10px;
-        }            
-</style>
-    <title>Market Prices</title>
+
+        .price-high {
+            color: green;
+            font-weight: bold;
+        }
+
+        .price-low {
+            color: red;
+            font-weight: bold;
+        }
+        
+        
+
+        .price-avg {
+            color: orange;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .marquee-content img {
+                width: 120px;
+                height: 80px;
+            }
+        }
+
+        footer {
+            margin-top: 30px;
+            background-color: red;
+            color: white;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <h2>View All Market Prices</h2>
-    <a href="home.jsp">Back to home</a>
-    <br><br>
-    <marquee>Note: Changes in prices come from shifts in market supply, market demand, or both.</marquee>
-    <h3>Markets of</h3>
-    <h4> Khammam, Enkoor</h4>
-    <table border="1">
-        <thead>
-            <tr>
-                
-                <th>Product Name</th>
-                <th>Date</th>
-                <th>Maximum Price</th>
-                <th>Average Price</th>
-                <th>Minimum Price</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach var="marketrate" items="${marketrates}">
-                <tr>
-                    
-                    <td>${marketrate.productname}</td>
-                    <td>${marketrate.date}</td>
-                    <td>${marketrate.maxrate}</td>
-                    <td>${marketrate.avgrate}</td>
-                    <td>${marketrate.minrate}</td>
+    <div class="container">
+        <h2>Current Market Prices</h2>
+        <a href="home.jsp" class="back-link">Back to Home</a>
 
+        <div class="market-notice">
+            Note: Prices fluctuate based on changes in market supply and demand conditions.
+        </div>
+
+        <div class="market-header">
+            <h3>Market Prices</h3>
+			<h4>Location: Enkoor and Khammam</h4>
+
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Product Name</th>
+                    <th>Date</th>
+                    <th>Maximum Price</th>
+                    <th>Average Price</th>
+                    <th>Minimum Price</th>
                 </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-    
-    
+            </thead>
+            <tbody>
+                <c:forEach var="marketrate" items="${marketrates}">
+                    <tr>
+                        <td class="product-name">${marketrate.productname}</td>
+                        <td>${marketrate.date}</td>
+                        <td class="price-high">${marketrate.maxrate}</td>
+                        <td class="price-avg">${marketrate.avgrate}</td>
+                        <td class="price-low">${marketrate.minrate}</td>
+                    </tr>
+                </c:forEach>
+            </tbody>
+        </table>
+    </div>
+
     <div class="marquee-container">
         <div class="marquee-content">
             <img src="/images/1.png" alt="Image 1">
             <img src="/images/2.png" alt="Image 2">
             <img src="/images/3.png" alt="Image 3">
             <img src="/images/4.png" alt="Image 4">
-             <img src="/images/5.png" alt="Image 5">
-              <img src="/images/6.png" alt="Image 6">
+            <img src="/images/5.png" alt="Image 5">
+            <img src="/images/6.png" alt="Image 6">
+            <img src="/images/1.png" alt="Image 1">
+            <img src="/images/2.png" alt="Image 2">
+            <img src="/images/3.png" alt="Image 3">
+            <img src="/images/4.png" alt="Image 4">
+            <img src="/images/5.png" alt="Image 5">
+            <img src="/images/6.png" alt="Image 6">
         </div>
     </div>
+
+    <footer>
+        <h6>&copy; 2019 MSR Products and Services.</h6>
+    </footer>
 </body>
 </html>

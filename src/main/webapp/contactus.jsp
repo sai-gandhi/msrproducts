@@ -3,9 +3,80 @@
 <!DOCTYPE html>
 <html>
 <style>
-contact1{
-background-color: red;
+ /* Contact Information Section */
+    .contact1 {
+        background-color: #fff;
+        max-width: 800px;
+        margin: 20px auto;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    
+    .contact1 h5 {
+        font-size: 16px;
+        color: #555;
+        text-align: center;
+        font-style: italic;
+        margin-bottom: 25px;
+    }
+    
+    .contact1 h4 {
+        margin: 15px 0;
+        padding: 10px;
+        background-color: lightgreen;
+        border-left: 4px solid #27ae60;
+        color: red;
+    }
+    
+    .contact1 h4:hover{
+      transform: translateY(-5px);
+    }
+.contact-form{
+	background: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto;
 }
+.why-contact-as{
+	background: lightgreen;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    width: 50%;
+    margin: 20px auto;
+}
+
+input[type="text"],
+input[type="date"],
+input[type="file"] {
+    padding: 10px;
+    width: 95%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+input[type="submit"], input[type="reset"] {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+input[type="reset"]{
+  	background-color: red;
+}
+
+input[type="submit"], input[type="reset"]:hover{
+	transform: translateY(-5px);
+}
+
+
 body{
 background-color: lightblue;
 }
@@ -58,7 +129,7 @@ background-color: lightblue;
 <h2>Contact Form</h2>
 
 <form action="savecontactinformation" method="post" enctype="multipart/form-data">
-<div>
+<div class="contact-form">
 <label>User Name: </label>
 <input type="text" placeholder="Enter User Name.."  required="required"  name="uname"/><br><br>
 <label>Contact Number: </label>
@@ -77,12 +148,12 @@ background-color: lightblue;
 </form>
 
 
-<div>
-<h3>Why Contact Us?</h3>
-<p>Get expert advice on our agricultural products.</p>
-<p>Discuss bulk orders and pricing.</p>
-<p>Ask about our farmer-friendly initiatives.</p>
-<h4>Don’t hesitate to reach out! We’re excited to connect and assist you.</h4>
+<div  class="why-contact-as" style="text-align:center;">
+    <h3>Why Contact Us?</h3>
+    <p>✔ Get expert advice on our agricultural products.</p>
+    <p>✔ Discuss bulk orders and pricing.</p>
+    <p>✔ Ask about our farmer-friendly initiatives.</p>
+    <h4>Don’t hesitate to reach out! We’re excited to connect and assist you.</h4>
 </div>
 
 <div class="marquee-container">
