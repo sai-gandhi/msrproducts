@@ -10,5 +10,7 @@
 <%@include file="adminnavbar.jsp" %>
 <h2>Admin Home</h2>
 
+<%@include file="footer.jsp" %>
+
 </body>
 </html>

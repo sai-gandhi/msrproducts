@@ -71,11 +71,14 @@ input[type="submit"], input[type="reset"] {
 input[type="reset"]{
   	background-color: red;
 }
+   input[type="submit"]:hover{
+ 	transform:translateY(-5px);
+ }
 
-input[type="submit"], input[type="reset"]:hover{
+ input[type="reset"]:hover{
 	transform: translateY(-5px);
 }
-
+ 
 
 body{
 background-color: lightblue;

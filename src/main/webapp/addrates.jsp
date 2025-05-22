@@ -116,24 +116,24 @@
 			<div class="addrate-container">
 				<div class="form-group">
 					<label>Product Name:</label>
-			        <input type="text" placeholder="Enter Product Name..." required="required" name="pname"><br><br>
+			        <input type="text" placeholder="Enter Product Name..." required="required" name="pname">
 				</div>
 				<div class="form-group">
 					<label>Date:</label>
-					<input type="date" placeholder="Enter Product Name..." required="required" name="pdate"><br><br>
+					<input type="date" placeholder="Enter Product Name..." required="required" name="pdate">
 				</div>
 				<div class="form-group">
 					<label>Maximum Price:</label>
-					<input type="text" placeholder="Enter Maximum Price..." required="required" name="maxprice"><br><br>
+					<input type="text" placeholder="Enter Maximum Price..." required="required" name="maxprice">
 				</div>
 				<div class="form-group">
 					<label>Average Price:</label>
-					<input type="text" placeholder="Enter Average Price..." required="required" name="avgprice"><br><br>
+					<input type="text" placeholder="Enter Average Price..." required="required" name="avgprice">
 				</div>
 				
 				<div class="form-group">
 					<label>Minimum Price:</label>
-			        <input type="text" placeholder="Enter Minimum Price..." required="required" name="minprice"><br><br>
+			        <input type="text" placeholder="Enter Minimum Price..." required="required" name="minprice">
 				</div>
 				
 				<div class="button-group">
@@ -142,6 +142,6 @@
 				</div>
 			</div>
 		</form>
-	
+	<%@include file="footer.jsp" %>
 	</body>
 </html>
