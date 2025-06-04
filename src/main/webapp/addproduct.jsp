@@ -158,8 +158,8 @@ body{
             	 <input type="file" id="image" required name="image">
             </div>
             <div class="button-group">
-            	<input class="btn btn-save type="submit" value="Add Product" />
-            	<input class="btn btn-clear type="reset" value="Clear" />
+            	<input type="submit" class="btn btn-save"  value="Add Product" />
+            	<input type="reset" class="btn btn-clear" value="Clear" />
             </div>
         </div>
     </form>

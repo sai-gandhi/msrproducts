@@ -3,9 +3,11 @@ package com.mkproducts.project.controller;
 import java.io.IOException;
 
 
+
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.sql.rowset.serial.SerialException;
@@ -22,13 +24,16 @@ import com.mkproducts.project.model.Contactus;
 import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.Product;
 import com.mkproducts.project.model.MarketRate;
+
+import com.mkproducts.project.model.Order;
+import com.mkproducts.project.model.OrderItem;
 import com.mkproducts.project.service.CustomerService;
 import com.mkproducts.project.model.Feedback;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-import org.springframework.ui.Model;
+
 
 
 @Controller
@@ -53,6 +58,8 @@ public class CustomerController {
 		mv.setViewName("customerlogin");
 		return mv;
 	}
+	
+	
 	
 	@GetMapping("customerhome")
 	public ModelAndView customerhome(HttpServletRequest request, HttpServletResponse response) {
@@ -255,5 +262,118 @@ public class CustomerController {
 			    }
 			    return new ModelAndView("crop_details");
 			}
+		 
+		 
+		 
+		 @GetMapping("placeorder")
+		 public ModelAndView placeOrder(HttpServletRequest request) {
+		     HttpSession session = request.getSession(false);
+		     if (session == null || session.getAttribute("customer") == null) {
+		         return new ModelAndView("redirect:/customerlogin");
+		     }
+		     
+		     ModelAndView mv = new ModelAndView("placeorder");
+		     List<Product> products = customerService.getAllAvailableProducts();
+		     mv.addObject("products", products);
+		     return mv;
+		 }
+
+		 @PostMapping("submitorder")
+		 public ModelAndView submitOrder(HttpServletRequest request, 
+		                               @RequestParam("productIds") List<Integer> productIds,
+		                               @RequestParam("quantities") List<Integer> quantities) {
+		     HttpSession session = request.getSession(false);
+		     if (session == null || session.getAttribute("customer") == null) {
+		         return new ModelAndView("redirect:/customerlogin");
+		     }
+		     
+		     Customer customer = (Customer) session.getAttribute("customer");
+		     ModelAndView mv = new ModelAndView();
+		     
+		     // Create order
+		     Order order = new Order();
+		     order.setCustomer(customer);
+		     order.setStatus("pending");
+		     
+		     double totalAmount = 0;
+		     List<OrderItem> items = new ArrayList<>();
+		     
+		     // Process each product
+		     for (int i = 0; i < productIds.size(); i++) {
+		         int productId = productIds.get(i);
+		         int quantity = quantities.get(i);
+		         
+		         if (quantity > 0) {
+		             Product product = customerService.displayProductiByIds(productId);
+		             
+		             // Check stock availability
+		             if (product.getProductcount() < quantity) {
+		                 mv.setViewName("placeorder");
+		                 mv.addObject("error", "Not enough stock for product: " + product.getName());
+		                 return mv;
+		             }
+		             
+		             // Create order item
+		             OrderItem item = new OrderItem();
+		             item.setProduct(product);
+		             item.setQuantity(quantity);
+		             item.setUnit_price(product.getCost());
+		             items.add(item);
+		             
+		             // Calculate total
+		             totalAmount += product.getCost() * quantity;
+		         }
+		     }
+		     
+		     if (items.isEmpty()) {
+		         mv.setViewName("placeorder");
+		         mv.addObject("error", "Please select at least one product");
+		         return mv;
+		     }
+		     
+		     order.setTotal_amount(totalAmount);
+		     
+		     // Save order
+		     String result = customerService.placeOrder(order, items);
+		     mv.setViewName("orderconfirmation");
+		     mv.addObject("message", result);
+		     mv.addObject("order", order);
+		     
+		     return mv;
+		 }
+
+		 @GetMapping("myorders")
+		 public ModelAndView viewMyOrders(HttpServletRequest request) {
+		     HttpSession session = request.getSession(false);
+		     if (session == null || session.getAttribute("customer") == null) {
+		         return new ModelAndView("redirect:/customerlogin");
+		     }
+		     
+		     Customer customer = (Customer) session.getAttribute("customer");
+		     ModelAndView mv = new ModelAndView("myorders");
+		     List<Order> orders = customerService.getCustomerOrders(customer);
+		     mv.addObject("orders", orders);
+		     return mv;
+		 }
+
+//		 @GetMapping("notifications")
+//		 public ModelAndView viewNotifications(HttpServletRequest request) {
+//		     HttpSession session = request.getSession(false);
+//		     if (session == null || session.getAttribute("customer") == null) {
+//		         return new ModelAndView("redirect:/customerlogin");
+//		     }
+//		     
+//		     Customer customer = (Customer) session.getAttribute("customer");
+//		     ModelAndView mv = new ModelAndView("notifications");
+//		     List<Notification> notifications = customerService.getCustomerNotifications(customer);
+//		     mv.addObject("notifications", notifications);
+//		     return mv;
+//		 }
+
+//		 @PostMapping("markasread")
+//		 public String markAsRead(@RequestParam("notificationId") int notificationId) {
+//		     customerService.markNotificationAsRead(notificationId);
+//		     return "redirect:/notifications";
+//		 }
 		 
 }

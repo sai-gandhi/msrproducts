@@ -18,6 +18,7 @@
 			<a href="addrates">Add Market Rates</a>&nbsp;&nbsp;<br><br>
 			<a href="viewadminmarketrate">View Market Rates</a>&nbsp;&nbsp;<br><br>
 			<a href="viewallcontacts">View All Contacts</a>&nbsp;&nbsp;<br><br>
+			<a href="manageorders">Manage Order</a>&nbsp;&nbsp;<br><br>
 			<a align="left" href="adminlogin">Logout</a>&nbsp;&nbsp;<br><br>
 			
 	

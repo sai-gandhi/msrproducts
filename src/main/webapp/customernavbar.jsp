@@ -79,6 +79,8 @@ body a:hover {
 <a href="customerviewallproducts">View Products</a>&nbsp;&nbsp;
 <a href="feedback">Feedback</a>&nbsp;&nbsp;
 <a href="viewfeedback">View Feedbacks</a>&nbsp;&nbsp;
+<a href="placeorder">Place Order</a>
+<a href="myorders">My Orders</a>
 <a href="crop_details">Crop Details</a>&nbsp;&nbsp;
 </body>
 </html>

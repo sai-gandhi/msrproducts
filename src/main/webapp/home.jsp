@@ -125,8 +125,7 @@ background-repeat: repeat-x;
 <marquee><h2>Welcome to MSR Products & Services</h2></marquee>
 
 <div class="text">
-<h4>Agriculture is not crop production as popular belief holds - it's the production of food and fiber from the world's land and waters. Without agriculture it is not possible to have a city, stock market, banks, university, church or army. Agriculture is the foundation of civilization and any stable economy.
-Read more at </h4>
+<h4>Agriculture is not crop production as popular belief holds - it's the production of food and fiber from the world's land and waters. Without agriculture it is not possible to have a city, stock market, banks, university, church or army. Agriculture is the foundation of civilization and any stable economy. </h4>
 </div>
 
 <div class="parent">
