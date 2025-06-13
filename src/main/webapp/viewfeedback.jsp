@@ -22,10 +22,28 @@
             width: 100px;
             height: auto;
         }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(-3px);
+        }
+
+        .back-link i {
+            margin-right: 5px;
+        }
     </style>
 </head>
 <body>
     <h2>Customer Feedbacks</h2>
+     <a href="customerhome.jsp" class="back-link"><i class="fas fa-arrow-left"></i> Back to Home</a>
     <table>
         <tr>
             <th>ID</th>

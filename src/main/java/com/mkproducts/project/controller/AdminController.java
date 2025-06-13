@@ -64,7 +64,7 @@ public class AdminController {
     }
     
     @GetMapping("adminhome")
-    public ModelAndView adminhome(HttpServletRequest request) {
+    public ModelAndView adminhome(HttpServletRequest request,HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if(session == null || session.getAttribute("admin") == null) {
             return new ModelAndView("redirect:/adminlogin");

@@ -5,68 +5,182 @@
     <meta charset="UTF-8">
     <title>Crop Details</title>
     <style>
+        :root {
+            --primary-green: #27ae60;
+            --dark-green: #219653;
+            --light-green: #d5f5e3;
+            --dark-text: #2c3e50;
+            --light-text: #7f8c8d;
+            --background: #f9f9f9;
+            --white: #ffffff;
+            --border-radius: 8px;
+            --box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
 
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: var(--background);
+            color: var(--dark-text);
+            line-height: 1.6;
+        }
+
+        .back-link {
+            display: inline-block;
             margin: 20px;
-            padding: 20px;
-            background-color: #f4f4f4;
+            padding: 8px 16px;
+            background-color: var(--primary-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: var(--border-radius);
+            font-weight: 500;
+            transition: var(--transition);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
-        h2 {
-            color: #2c3e50;
-            text-align: center;
+
+        .back-link:hover {
+            background-color: var(--dark-green);
+            transform: translateY(-2px);
         }
+
         .container {
-            max-width: 900px;
-            margin: auto;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            max-width: 1200px;
+            margin: 20px auto;
+            background: var(--white);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
         }
+
+        h2 {
+            color: var(--primary-green);
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: 600;
+            position: relative;
+            padding-bottom: 15px;
+        }
+        h3{
+         color:red;
+        }
+
+        h3:after,h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background-color: var(--primary-green);
+        }
+        
+        
+        
+        
+
         table {
             width: 100%;
-            border-collapse: collapse;
-            margin-top: 20px;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-top: 30px;
+            overflow: hidden;
+            border-radius: var(--border-radius);
+            box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
         }
-        table, th, td {
-            border: 1px solid black;
-        }
-        th, td {
-            padding: 10px;
-            text-align: left;
-        }
+
         th {
-            background-color: #27ae60;
-            color: white;
+            background-color: var(--primary-green);
+            color: var(--white);
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.85em;
+            letter-spacing: 0.5px;
         }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            vertical-align: middle;
+        }
+
+        tr:last-child td {
+            border-bottom: none;
+        }
+
+        tr:nth-child(even) {
+            background-color: var(--light-green);
+        }
+
+        tr:hover {
+            background-color: rgba(39, 174, 96, 0.1);
+        }
+
         .crop-img {
-            width: 100px;
-            height: 100px;
+            width: 80px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 5px;
+            border-radius: 50%;
             display: block;
-            margin: auto;
+            margin: 0 auto;
+            border: 3px solid var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .crop-img:hover {
+            transform: scale(1.1);
+        }
+
+        b {
+            color: var(--dark-green);
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 15px;
+            }
+            
+            table {
+                display: block;
+                overflow-x: auto;
+            }
+            
+            th, td {
+                padding: 10px;
+                font-size: 0.9em;
+            }
+            
+            .crop-img {
+                width: 60px;
+                height: 60px;
+            }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
 <div>
-	<a href="customerhome">Back</a>
+    <a href="customerhome" class="back-link">← Back to Home</a>
 </div>
 <div class="container">
-	<h2>Top High-Value Crops for Farmers to Grow in 2025 to Maximize Profits</h2>
-    <h2>Crop Details</h2>
+    <h2>Top High-Value Crops for Farmers to Grow in 2025 to Maximize Profits</h2>
+    <h3>Crop Details</h3>
     <table>
         <tr>
-            <th class="crop-container">Crop</th>
+            <th>Crop</th>
             <th>Image</th>
             <th>Uses</th>
             <th>Best Land Type</th>
             <th>Best Season</th>
             <th>Recommended Seeds</th>
-            <th>Expected Cost</th>
+            <th>Expected Cost (₹)</th>
         </tr>
         <tr>
             <td><b>Chilli</b></td>
@@ -102,7 +216,7 @@
             <td>Well-drained loamy soil with moderate fertility.</td>
             <td>October to December (Rabi).</td>
             <td>PBW-343, HD-2967, Lok-1.</td>
-            <td> 2,000 - 1,700</td>
+            <td>2,000 - 1,700</td>
         </tr>
         <tr>
             <td><b>Jonna (Sorghum)</b></td>
