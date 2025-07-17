@@ -1,6 +1,8 @@
 package com.mkproducts.project.service;
 
 import java.util.List;
+
+
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.mkproducts.project.model.Admin;
 import com.mkproducts.project.model.Contactus;
+import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Order;
 import com.mkproducts.project.model.OrderItem;
@@ -16,6 +19,7 @@ import com.mkproducts.project.model.Product;
 import com.mkproducts.project.model.OrderStatus;
 import com.mkproducts.project.repository.AdminRepository;
 import com.mkproducts.project.repository.ContactusRepository;
+import com.mkproducts.project.repository.CustomerRepository;
 import com.mkproducts.project.repository.MarketRateRepository;
 import com.mkproducts.project.repository.OrderItemRepository;
 import com.mkproducts.project.repository.OrderRepository;
@@ -41,6 +45,9 @@ public class AdminServiceImpl implements AdminService {
     
     @Autowired
     private OrderItemRepository orderItemRepository;
+    
+    @Autowired
+    private CustomerRepository customerRepository;
 
     // Authentication
     @Override
@@ -73,11 +80,7 @@ public class AdminServiceImpl implements AdminService {
         return productRepository.findById(id).orElse(null);
     }
 
-    @Override
-    @Transactional
-    public void deleteProduct(int id) {
-        productRepository.deleteById(id);
-    }
+   
 
     // Contact Management
     @Override
@@ -167,4 +170,16 @@ public class AdminServiceImpl implements AdminService {
             productRepository.save(product);
         }
     }
+
+	@Override
+	public long customercount() {
+		return customerRepository.count();
+	}
+
+	@Override
+	public List<Customer> viewAllCustomers() {
+		return customerRepository.findAll();
+	}
+
+	
 }

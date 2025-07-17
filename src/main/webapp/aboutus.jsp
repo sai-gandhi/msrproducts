@@ -240,7 +240,7 @@
         margin-bottom: 1.2rem;
         padding-left: 2rem;
         position: relative;
-        color: var(--text-light);
+        color: var(--text-red);
         transition: all 0.3s ease;
     }
     
@@ -259,7 +259,7 @@
     }
     
     .specialization p:hover::before {
-        color: var(--accent);
+        color: green;
         transform: translateX(5px);
     }
     
@@ -337,7 +337,7 @@
     
     .vision-values p {
         margin-bottom: 1.5rem;
-        color: var(--text-light);
+        color: green;
         padding-left: 1rem;
         border-left: 2px solid var(--primary-light);
     }
@@ -364,7 +364,7 @@
     .values-list p {
         padding-left: 2rem;
         margin-bottom: 1.2rem;
-        color: var(--text-light);
+        color: var(--text-green);
     }
     
     /* ===== Logo Marquee ===== */

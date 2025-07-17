@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
@@ -12,7 +13,6 @@
             background-color: #f5f7fa;
             color: #333;
             line-height: 1.6;
-            
         }
 
         .container {
@@ -96,14 +96,19 @@
             border-bottom: 1px solid #e0e0e0;
             color: #2c3e50;
         }
-     
+
         tr:nth-child(even) {
             background-color: #f8f9fa;
         }
 
+        tr {
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
         tr:hover {
             background-color: lightgray;
-             transform:translateY(-5px);
+            transform: translateY(-5px);
         }
 
         .marquee-container {
@@ -118,23 +123,6 @@
 
         .marquee-content {
             display: inline-block;
-            animation: marquee 20s linear infinite;
-        }
-
-        @keyframes marquee {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        .marquee-container {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            padding: 10px;
-        }
-        
-        .marquee-content {
-            display: inline-block;
             animation: marquee 10s linear infinite;
         }
 
@@ -146,12 +134,11 @@
                 transform: translateX(-50%);
             }
         }
-        
-        .product-name{
-        font-weight:bold;
-        color:black;
-        }
 
+        .product-name {
+            font-weight: bold;
+            color: black;
+        }
 
         .price-high {
             color: green;
@@ -162,8 +149,6 @@
             color: red;
             font-weight: bold;
         }
-        
-        
 
         .price-avg {
             color: orange;
@@ -183,10 +168,11 @@
         }
 
         footer {
-            margin-top: 30px;
+            margin-top: 20px;
             background-color: red;
             color: white;
             text-align: center;
+            padding: 0.3px;
         }
     </style>
 </head>
@@ -201,8 +187,7 @@
 
         <div class="market-header">
             <h3>Market Prices</h3>
-			<h4>Location: Enkoor and Khammam</h4>
-
+            <h4>Location: Enkoor and Khammam</h4>
         </div>
 
         <table>
@@ -216,13 +201,18 @@
                 </tr>
             </thead>
             <tbody>
+                <c:if test="${empty marketrates}">
+                    <tr>
+                        <td colspan="5">No market data available.</td>
+                    </tr>
+                </c:if>
                 <c:forEach var="marketrate" items="${marketrates}">
                     <tr>
                         <td class="product-name">${marketrate.productname}</td>
                         <td>${marketrate.date}</td>
-                        <td class="price-high">${marketrate.maxrate}</td>
-                        <td class="price-avg">${marketrate.avgrate}</td>
-                        <td class="price-low">${marketrate.minrate}</td>
+                        <td class="price-high">Rs. ${marketrate.maxrate}</td>
+                        <td class="price-avg">Rs. ${marketrate.avgrate}</td>
+                        <td class="price-low">Rs. ${marketrate.minrate}</td>
                     </tr>
                 </c:forEach>
             </tbody>
@@ -231,23 +221,17 @@
 
     <div class="marquee-container">
         <div class="marquee-content">
-            <img src="/images/1.png" alt="Image 1">
-            <img src="/images/2.png" alt="Image 2">
-            <img src="/images/3.png" alt="Image 3">
-            <img src="/images/4.png" alt="Image 4">
-            <img src="/images/5.png" alt="Image 5">
-            <img src="/images/6.png" alt="Image 6">
-            <img src="/images/1.png" alt="Image 1">
-            <img src="/images/2.png" alt="Image 2">
-            <img src="/images/3.png" alt="Image 3">
-            <img src="/images/4.png" alt="Image 4">
-            <img src="/images/5.png" alt="Image 5">
-            <img src="/images/6.png" alt="Image 6">
+            <img src="${pageContext.request.contextPath}/images/1.png" alt="Image 1">
+            <img src="${pageContext.request.contextPath}/images/2.png" alt="Image 2">
+            <img src="${pageContext.request.contextPath}/images/3.png" alt="Image 3">
+            <img src="${pageContext.request.contextPath}/images/4.png" alt="Image 4">
+            <img src="${pageContext.request.contextPath}/images/5.png" alt="Image 5">
+            <img src="${pageContext.request.contextPath}/images/6.png" alt="Image 6">
         </div>
     </div>
 
     <footer>
-        <h6>&copy; 2019 MSR Products and Services.</h6>
+        <p>&copy; 2019 MSR Products and Services.</p>
     </footer>
 </body>
 </html>

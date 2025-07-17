@@ -2,6 +2,7 @@ package com.mkproducts.project.controller;
 
 import java.io.IOException;
 
+
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -17,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.mkproducts.project.model.Admin;
 import com.mkproducts.project.model.Contactus;
+import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Order;
 import com.mkproducts.project.model.Product;
@@ -234,15 +237,7 @@ public class AdminController {
         return "redirect:/viewallcontacts";
     }
     
-    @GetMapping("productdelete")
-    public String productdelete(@RequestParam int id, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if(session == null || session.getAttribute("admin") == null) {
-            return "redirect:/adminlogin";
-        }
-        adminService.deleteProduct(id);
-        return "redirect:/viewallproducts";
-    }
+
     
     @GetMapping("updateproduct")
     public ModelAndView updateproduct(@RequestParam int id, HttpServletRequest request) {
@@ -341,6 +336,23 @@ public class AdminController {
         mv.addObject("order", order);
         return mv;
     }
+    
+    @GetMapping("viewallcustomers")
+    public ModelAndView viewallstudents(HttpServletRequest request) {
+    	HttpSession session=request.getSession(false);
+    	if(session==null||session.getAttribute("admin")==null) {
+    		return new ModelAndView("redirect:/adminlogin");
+    	}
+      ModelAndView mv=new ModelAndView();
+      mv.setViewName("viewallcustomers");
+      long count=adminService.customercount();
+      mv.addObject("count",count);
+      List<Customer> customers=adminService.viewAllCustomers();
+      mv.addObject("customerlist",customers);
+      return mv;
+    }
+    
+   
     
    
 }

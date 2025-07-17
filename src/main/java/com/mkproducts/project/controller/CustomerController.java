@@ -5,6 +5,7 @@ import java.io.IOException;
 
 
 import java.io.OutputStream;
+import java.net.http.HttpResponse;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import com.mkproducts.project.model.OrderItem;
 import com.mkproducts.project.service.CustomerService;
 import com.mkproducts.project.model.Feedback;
 
+import jakarta.security.auth.message.callback.PrivateKeyCallback.Request;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
@@ -162,7 +164,11 @@ public class CustomerController {
 	 
 	
 	 @GetMapping("feedback")
-		public ModelAndView feedback() {
+		public ModelAndView feedback(HttpServletRequest request) {
+		  HttpSession session=request.getSession(false);
+		  if(session==null||session.getAttribute("customer")==null) {
+			  return new ModelAndView("redirect:/customerlogin");
+		  }
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("feedback");
 			return mv;
@@ -197,7 +203,11 @@ public class CustomerController {
 
 	 
 	 @GetMapping("viewfeedback")
-		public ModelAndView viewafeedback() {
+		public ModelAndView viewafeedback(HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
+	     if (session == null || session.getAttribute("customer") == null) {
+	         return new ModelAndView("redirect:/customerlogin");
+	     }
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("viewfeedback");
 			List<Feedback> feedback=customerService.getAllFeedbacks();
@@ -227,7 +237,11 @@ public class CustomerController {
 		}
 	 
 	 @GetMapping("customerviewallproducts")
-		public ModelAndView viewallproducts(HttpServletRequest request, HttpServletResponse response) {
+		public ModelAndView viewallproducts(HttpServletRequest request) {
+		 HttpSession session = request.getSession(false);
+	     if (session == null || session.getAttribute("customer") == null) {
+	         return new ModelAndView("redirect:/customerlogin");
+	     }
 			ModelAndView mv=new ModelAndView();
 			mv.setViewName("customerviewallproducts");
 			List<Product> products=customerService.viewAllProducts();
@@ -251,15 +265,10 @@ public class CustomerController {
 		 @GetMapping("crop_details")
 		 public ModelAndView crop_details(HttpServletRequest request, HttpServletResponse response) {
 			    HttpSession session = request.getSession(false);
-
-			    // Disable browser caching
-			    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate"); // HTTP 1.1
-			    response.setHeader("Pragma", "no-cache"); // HTTP 1.0
-			    response.setDateHeader("Expires", 0); // Proxies
-
 			    if (session == null || session.getAttribute("customer") == null) {
 			        return new ModelAndView("redirect:/customerlogin"); // Redirect to login page if session expired
 			    }
+			    
 			    return new ModelAndView("crop_details");
 			}
 		 
@@ -355,7 +364,7 @@ public class CustomerController {
 		     mv.addObject("orders", orders);
 		     return mv;
 		 }
-
+//
 //		 @GetMapping("notifications")
 //		 public ModelAndView viewNotifications(HttpServletRequest request) {
 //		     HttpSession session = request.getSession(false);
@@ -368,12 +377,12 @@ public class CustomerController {
 //		     List<Notification> notifications = customerService.getCustomerNotifications(customer);
 //		     mv.addObject("notifications", notifications);
 //		     return mv;
-//		 }
-
-//		 @PostMapping("markasread")
+//	 }
+//
+//	 @PostMapping("markasread")
 //		 public String markAsRead(@RequestParam("notificationId") int notificationId) {
 //		     customerService.markNotificationAsRead(notificationId);
 //		     return "redirect:/notifications";
 //		 }
-		 
+//		 
 }

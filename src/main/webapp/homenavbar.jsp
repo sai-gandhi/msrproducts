@@ -233,11 +233,11 @@
             </button>
             <div class="homenavbar" id="mainMenu">
                 <a href="home.jsp"><i class="fas fa-home"></i> Home</a>
-                <a href="aboutus.jsp"><i class="fas fa-info-circle"></i> About Us</a>
-                <a href="contactus.jsp"><i class="fas fa-envelope"></i> Contact Us</a>
-                <a href="marketrates.jsp"><i class="fas fa-chart-line"></i> Market Rates</a>
-                <a href="customerlogin.jsp"><i class="fas fa-user"></i> Customer Login</a>
-                <a href="customerregister.jsp"><i class="fas fa-user-plus"></i> Customer Register</a>
+                <a href="aboutus"><i class="fas fa-info-circle"></i> About Us</a>
+                <a href="contactus"><i class="fas fa-envelope"></i> Contact Us</a>
+                <a href="marketrates"><i class="fas fa-chart-line"></i> Market Rates</a>
+                <a href="customerlogin"><i class="fas fa-user"></i> Customer Login</a>
+                <a href="customerregister"><i class="fas fa-user-plus"></i> Customer Register</a>
             </div>
         </div>
     </div>

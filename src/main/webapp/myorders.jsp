@@ -160,7 +160,7 @@
     <div class="orders-container">
         <c:forEach items="${orders}" var="order">
             <div class="order-card">
-                <h3>Order #${order.order_id}</h3>
+                <h3>Order Id #${order.order_id}</h3>
                 <div class="order-meta">
                     <span>Date: ${order.order_date}</span>
                     <span class="total-amount">Total: ₹${order.total_amount}</span>

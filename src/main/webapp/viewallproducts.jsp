@@ -100,7 +100,8 @@
                     <button class="toggle-btn" onclick="toggleDesc(this)">Show More</button>
                 </td>
                 <td>
-                    <a href="<c:url value='/productdelete?id=${product.id}' />">Delete</a>
+                    <a href="updateproduct?id=${product.id}">Edit</a>
+
                 </td>
             </tr>
         </c:forEach>
