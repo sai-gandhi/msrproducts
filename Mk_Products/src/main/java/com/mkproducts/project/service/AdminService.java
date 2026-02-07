@@ -4,31 +4,42 @@ import java.util.List;
 
 import com.mkproducts.project.model.Admin;
 import com.mkproducts.project.model.Contactus;
+import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
+import com.mkproducts.project.model.Order;
 import com.mkproducts.project.model.Product;
 
 public interface AdminService {
-	public Admin checkAdminLogin(String name,String password);
-	
-	
-	public String addProduct(Product product);
-	public List<Product> viewAllProduct();
-	public Product displayProductiById(int id);
+    // Authentication
+    Admin checkAdminLogin(String name, String password);
+    
+    // Product Management
+    String addProduct(Product product);
+    String updateProduct(Product product);
+    List<Product> viewAllProduct();
+    Product displayProductiById(int id);
+    
+    
+    // Contact Management
+    List<Contactus> viewAllContacts();
+    Contactus displayImageById(int id);
+    void deleteContact(int id);
+    
+    // Market Rate Management
+    String addRates(MarketRate r);
+    MarketRate displayProductById(int id);
+    void deleteMarketrate(int id);
+    
+    // Order Management
+    List<Order> getPendingOrders();
+    List<Order> getProcessedOrders();
+    Order getOrderById(int id);
+    void updateOrderStatus(int orderId, String status, String message);
+
+    
+    
+	long customercount();
+	List<Customer> viewAllCustomers();
 
 	
-	public List<Contactus> viewAllContacts();
-	public Contactus displayImageById(int id);
-
-
-	public String addRates(MarketRate r);
-
-
-	public MarketRate displayProductById(int id);
-	public MarketRate updateRate(MarketRate marketRate);
-
-
-	public void deleteContact(int id);
-
-
-	public void deleteProduct(int id);
 }

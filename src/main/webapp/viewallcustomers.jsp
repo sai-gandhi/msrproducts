@@ -18,6 +18,7 @@ Total Customers:<c:out value="${count }"></c:out>
 <th>Id</th>
 <th>Name</th>
 <th>Email</th>
+<th> Password</th>
 <th>Location</th>
 <th>Contact</th>
 
@@ -27,6 +28,7 @@ Total Customers:<c:out value="${count }"></c:out>
 <td><c:out value="${customer.id }"></c:out></td>
 <td><c:out value="${customer.name }"></c:out></td>
 <td><c:out value="${customer.email }"></c:out></td>
+<td><c:out value="${customer.password }"></c:out></td>
 <td><c:out value="${customer.location }"></c:out></td>
 <td><c:out value="${customer.contact }"></c:out></td>
 

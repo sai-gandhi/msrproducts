@@ -226,7 +226,7 @@
         <c:forEach items="${pendingOrders}" var="order">
             <div class="order-card">
                 <div class="order-header">
-                    <h3>Order #${order.order_id}</h3>
+                    <h3>Order #${order.orderId}</h3>
                     <div class="customer-info">
                         <div class="info-item"><strong>Customer:</strong> ${order.customer.name}</div>
                         <div class="info-item"><strong>Contact:</strong> ${order.customer.contact}</div>
@@ -251,14 +251,14 @@
                 <div class="order-footer">
                     <div class="action-form">
                         <form action="updateorderstatus" method="post" class="form-group">
-                            <input type="hidden" name="orderId" value="${order.order_id}">
-                            <input type="hidden" name="status" value="approved">
+                            <input type="hidden" name="orderId" value="${order.id}">
+                            <input type="hidden" name="status" value="APPROVED">
                             <button type="submit" class="btn-approve">Approve Order</button>
                         </form>
                         
                         <form action="updateorderstatus" method="post" class="form-group">
-                            <input type="hidden" name="orderId" value="${order.order_id}">
-                            <input type="hidden" name="status" value="rejected">
+                            <input type="hidden" name="orderId" value="${order.id}">
+                            <input type="hidden" name="status" value="REJECTED">
                             <label>Reason for rejection:</label>
                             <input type="text" name="message" required>
                             <button type="submit" class="btn-reject">Reject Order</button>
@@ -272,7 +272,7 @@
         <c:forEach items="${processedOrders}" var="order">
             <div class="order-card ${order.status}">
                 <div class="order-header">
-                    <h3>Order #${order.order_id}</h3>
+                    <h3>Order #${order.orderId}</h3>
                     <div class="customer-info">
                         <div class="info-item"><strong>Customer:</strong> ${order.customer.name}</div>
                         <div class="info-item"><strong>Contact:</strong> ${order.customer.contact}</div>

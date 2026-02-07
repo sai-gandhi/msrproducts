@@ -24,7 +24,9 @@ import com.mkproducts.project.model.Contactus;
 import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Order;
+import com.mkproducts.project.model.OrderItem;
 import com.mkproducts.project.model.Product;
+import com.mkproducts.project.repository.OrderRepository;
 import com.mkproducts.project.service.AdminService;
 import com.mkproducts.project.service.CustomerService;
 
@@ -310,19 +312,31 @@ public class AdminController {
         return mv;
     }
     
-    @PostMapping("updateorderstatus")
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @PostMapping("/updateorderstatus")
     public String updateOrderStatus(@RequestParam("orderId") int orderId,
-                                  @RequestParam("status") String status,
-                                  @RequestParam(value = "message", required = false) String message,
-                                  HttpServletRequest request) {
+                                    @RequestParam("status") String status,
+                                    @RequestParam(value = "message", required = false) String message,
+                                    HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if(session == null || session.getAttribute("admin") == null) {
+        if (session == null || session.getAttribute("admin") == null) {
             return "redirect:/adminlogin";
         }
-        
-        adminService.updateOrderStatus(orderId, status, message);
+
+        // ✅ Fetch the Order object from the DB
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+        List<OrderItem> items = order.getItems();
+
+        // ✅ Pass the Order object and other parameters to the service
+        adminService.updateOrderStatus(order, orderId, status, message,items);
+
         return "redirect:/manageorders";
     }
+
+
     
     @GetMapping("vieworder")
     public ModelAndView viewOrder(@RequestParam int id, HttpServletRequest request) {

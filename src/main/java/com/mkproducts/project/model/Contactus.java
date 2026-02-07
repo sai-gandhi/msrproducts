@@ -19,6 +19,8 @@ public class Contactus {
 	private int id;
 	@Column(name="user_name", nullable = false, length = 55)
 	private String name;
+	@Column(name="email",nullable = false,length=55)
+	private String email;
 	@Column(name="user_contact", nullable = false, length = 55)
 	private String contact;
 	@Column(name="user_location", nullable = false, length = 150)
@@ -41,6 +43,13 @@ public class Contactus {
 	}
 	public void setName(String name) {
 		this.name = name;
+	}
+	
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email=email;
 	}
 	public String getContact() {
 		return contact;

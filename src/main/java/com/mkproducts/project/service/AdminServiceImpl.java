@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -48,6 +50,9 @@ public class AdminServiceImpl implements AdminService {
     
     @Autowired
     private CustomerRepository customerRepository;
+    
+    @Autowired
+    private JavaMailSender mailSender;
 
     // Authentication
     @Override
@@ -118,17 +123,15 @@ public class AdminServiceImpl implements AdminService {
         marketRateRepository.deleteById(id);
     }
 
-    // Order Management Methods
-    
     @Override
     public List<Order> getPendingOrders() {
-        return orderRepository.findByStatus(OrderStatus.PENDING.toString());
+        return orderRepository.findByStatus(OrderStatus.PENDING);
     }
 
     @Override
     public List<Order> getProcessedOrders() {
         return orderRepository.findAll().stream()
-                .filter(order -> !order.getStatus().equals(OrderStatus.PENDING.toString()))
+                .filter(order -> order.getStatus() != OrderStatus.PENDING)
                 .collect(Collectors.toList());
     }
 
@@ -142,23 +145,131 @@ public class AdminServiceImpl implements AdminService {
         return order;
     }
 
+   
+
+    
     @Override
     @Transactional
-    public void updateOrderStatus(int orderId, String status, String message) {
-        Order order = orderRepository.findById(orderId).orElse(null);
-        if (order != null) {
-            String previousStatus = order.getStatus();
-            order.setStatus(status);
-            orderRepository.save(order);
-            
-            if (OrderStatus.APPROVED.toString().equals(status)) {
-                updateProductStock(order, false); // Deduct stock
-            } else if (OrderStatus.REJECTED.toString().equals(status) && 
-                      OrderStatus.PENDING.toString().equals(previousStatus)) {
-                updateProductStock(order, true); // Restore stock
+    public void updateOrderStatus(Order order, int orderId, String status, String message,List<OrderItem> items) {
+        // ❌ Problem: You already have an 'order' parameter — don’t redeclare it!
+        // ✅ FIX: Use a different variable name when fetching from repository
+        Order existingOrder = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+
+        OrderStatus previousStatus = existingOrder.getStatus();
+        OrderStatus newStatus = OrderStatus.valueOf(status.trim().toUpperCase());
+
+        existingOrder.setStatus(newStatus);
+        orderRepository.save(existingOrder);
+
+        if (newStatus == OrderStatus.APPROVED) {
+            updateProductStock(existingOrder, false); // Deduct stock
+            sendOrderConfirmNotification(existingOrder,items);
+        } else if (newStatus == OrderStatus.REJECTED && previousStatus == OrderStatus.PENDING) {
+            updateProductStock(existingOrder, true); // Restore stock
+            // optionally: send rejection email/message with reason
+            if (message != null && !message.isEmpty()) {
+                sendOrderRejectionNotification(existingOrder, message,items);
             }
         }
     }
+
+    
+    public void sendOrderConfirmNotification(Order order,List<OrderItem> items) {
+        try {
+            if (order.getCustomer() == null || order.getCustomer().getEmail() == null) {
+                System.err.println("❌ Cannot send email: Customer or email is null for order " + order.getOrderId());
+                return;
+            }
+            
+            StringBuilder itemDetails = new StringBuilder();
+            for (OrderItem item : items) {
+                itemDetails.append("• ")
+                		   .append(item.getProduct().getName())
+                           .append(" — Quantity: ")
+                           .append(item.getQuantity())
+                           .append("\n");
+            }
+           
+
+            String customerName = order.getCustomer().getName();
+            String toEmail = order.getCustomer().getEmail();
+
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setTo(toEmail);
+            message.setSubject("✅ Your Order #" + order.getOrderId() + " Has Been Approved!");
+
+            message.setText("Hello " + customerName + ",\n\n"
+                    + "Great news! Your order (Order ID: " + order.getOrderId() + ") has been approved by MSR Products & Services.\n\n"
+                    + "📦 Order Details:\n"
+                    + itemDetails.toString()
+                    + "Total Amount: ₹" + order.getTotal_amount() + "\n\n"
+                    + "Status: " + order.getStatus() + "\n\n"
+                    + "Our team will process your order soon.\n"
+                    + "If you have any questions or need help understanding how our products can be used in your field, we’d be happy to assist you!\n"
+                    + "Thank you for shopping with MSR Products & Services!\n\n"
+                    + "Best regards,\nMSR Products & Services Team");
+
+            mailSender.send(message);
+            System.out.println("✅ Order confirmation email sent to: " + toEmail);
+
+        } catch (Exception e) {
+            System.err.println("❌ Failed to send email for order " + order.getOrderId() + ": " + e.getMessage());
+        }
+    }
+
+
+   
+    	public void sendOrderRejectionNotification(Order order, String reason,List<OrderItem> items) {
+    	    try {
+    	        if (order.getCustomer() == null || order.getCustomer().getEmail() == null) {
+    	            System.err.println("❌ Cannot send email: Customer or email is null for order " + order.getOrderId());
+    	            return;
+    	        }
+    	        
+    	        StringBuilder itemDetails = new StringBuilder();
+                for (OrderItem item : items) {
+                    itemDetails.append("• ")
+                    		   .append(item.getProduct().getName())
+                               .append(" — Quantity: ")
+                               .append(item.getQuantity())
+                               .append("\n");
+                }
+
+    	        String customerName = order.getCustomer().getName();
+    	        String toEmail = order.getCustomer().getEmail();
+
+    	        SimpleMailMessage message = new SimpleMailMessage();
+    	        message.setTo(toEmail);
+    	        message.setSubject("❌ Order #" + order.getOrderId() + " Has Been Rejected");
+
+    	        String rejectionMessage = (reason != null && !reason.trim().isEmpty())
+    	                ? reason.trim()
+    	                : "Unfortunately, we were unable to process your order at this time.";
+
+    	        message.setText("Hello " + customerName + ",\n\n"
+    	                + "We regret to inform you that your order (Order ID: " + order.getOrderId() + ") \n\n"
+    	                + "📦 Order Details:\n\n"
+    	                + itemDetails.toString()
+    	                + "has been rejected by MSR Products & Services.\n\n"
+    	                + "Status: " + order.getStatus() + "\n\n"
+    	                + "Reason for rejection:\n"
+    	                + rejectionMessage + "\n\n"
+    	                + "please contact our support team.\n\n"
+    	                + "We sincerely apologize for the inconvenience caused.\n\n"
+    	                + "Best regards,\n"
+    	                + "MSR Products & Services Team");
+
+    	        mailSender.send(message);
+    	        System.out.println("📧 Rejection email sent successfully to " + toEmail);
+
+    	    } catch (Exception e) {
+    	        System.err.println("❌ Failed to send rejection email for order " + order.getOrderId() + ": " + e.getMessage());
+    	    }
+    	
+
+    }
+
 
     @Transactional
     protected void updateProductStock(Order order, boolean restoreStock) {
@@ -170,6 +281,8 @@ public class AdminServiceImpl implements AdminService {
             productRepository.save(product);
         }
     }
+
+
 
 	@Override
 	public long customercount() {

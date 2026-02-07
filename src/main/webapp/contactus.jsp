@@ -7,6 +7,8 @@
     <title>Contact Us - MSR Products</title>
     
     <!-- Google Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Font Awesome for Icons -->
@@ -353,6 +355,12 @@
                     <label for="uname">Name</label>
                     <input class="form-control" type="text" id="uname" name="uname" required placeholder="Enter your name">
                 </div>
+                
+                 <div class="form-group">
+                    <label for="email">Email</label>
+                    <input class="form-control" type="email" id="email" name="email" required placeholder="Enter your Email">
+                </div>
+                
                 <div class="form-group">
                     <label for="ucontact">Contact Number</label>
                     <input class="form-control" type="text" id="ucontact" name="ucontact" required placeholder="Enter your contact number">

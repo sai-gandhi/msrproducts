@@ -221,6 +221,9 @@
                 font-size: 1.3rem;
             }
         }
+        .discount{
+         color: red;
+        }
     </style>
 </head>
 <body>
@@ -236,10 +239,14 @@
                 <a href="aboutus"><i class="fas fa-info-circle"></i> About Us</a>
                 <a href="contactus"><i class="fas fa-envelope"></i> Contact Us</a>
                 <a href="marketrates"><i class="fas fa-chart-line"></i> Market Rates</a>
+                <a href="production"><i class="fas fa-chart-line"></i> Production</a>
                 <a href="customerlogin"><i class="fas fa-user"></i> Customer Login</a>
                 <a href="customerregister"><i class="fas fa-user-plus"></i> Customer Register</a>
             </div>
         </div>
+    </div>
+    <div>
+    <marquee class="discount">Get 10% off on all products – limited time only!</marquee>
     </div>
 </div>
 

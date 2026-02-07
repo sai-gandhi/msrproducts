@@ -62,5 +62,6 @@ public class Customer {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	
 
 }

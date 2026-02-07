@@ -27,6 +27,47 @@ public class PublicController {
 		return mv;
 	}
 	
+	
+	@GetMapping("production")
+	public ModelAndView production(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("production");
+		return mv;
+	}
+	
+	@GetMapping("oil_seeds")
+	public ModelAndView oil_seeds(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("oil_seeds");
+		return mv;
+	}
+	
+	@GetMapping("food_grains")
+	public ModelAndView food_grains(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("food_grains");
+		return mv;
+	}
+	
+	@GetMapping("commercial_crop")
+	public ModelAndView commercial_crop(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("commercial_crop");
+		return mv;
+	}
+	
+	
+	
+	
+	@GetMapping("zzgraph")
+	public ModelAndView zzgraph(){
+		ModelAndView mv=new ModelAndView();
+		mv.setViewName("zzgraph");
+		return mv;
+	}
+	
+	
+	
 	@GetMapping("contactus")
 	public ModelAndView contactus(){
 		ModelAndView mv=new ModelAndView();

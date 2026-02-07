@@ -160,22 +160,29 @@
     <div class="orders-container">
         <c:forEach items="${orders}" var="order">
             <div class="order-card">
-                <h3>Order Id #${order.order_id}</h3>
-                <div class="order-meta">
-                    <span>Date: ${order.order_date}</span>
-                    <span class="total-amount">Total: ₹${order.total_amount}</span>
-                    <span>Status: <span class="status-${order.status}">${order.status}</span></span>
-                </div>
-                
-                <h4>Items:</h4>
-                <ul>
-                    <c:forEach items="${order.items}" var="item">
-                        <li>
-                            <span>${item.product.name} (${item.quantity} × ₹${item.unit_price})</span>
-                            <span>₹${item.quantity * item.unit_price}</span>
-                        </li>
-                    </c:forEach>
-                </ul>
+                <h3>Order Id #${order.orderId}</h3>
+			<div class="order-meta">
+			    <span>Date: ${order.order_date}</span>
+			    <span class="total-amount">Total: ₹${order.total_amount}</span>
+			    <span>Status: <span class="status-${order.status}">${order.status}</span></span>
+			</div>
+			
+			<h4>Items:</h4>
+			<ul>
+			    <c:forEach items="${order.items}" var="item">
+			        <li>
+			            <span>${item.product.name} (${item.quantity} × ₹${item.unit_price})</span>
+			            <span>₹${item.quantity * item.unit_price}</span>
+			        </li>
+			    </c:forEach>
+			</ul>
+			<a href="generateInvoice?orderId=${order.orderId}"
+   style="background:#2874f0;color:white;padding:8px 14px;border-radius:5px;text-decoration:none;">
+    View PDF
+</a>
+
+
+			
             </div>
         </c:forEach>
     </div>

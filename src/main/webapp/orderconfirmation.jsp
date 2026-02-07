@@ -114,7 +114,8 @@
         <c:if test="${not empty message}">
             <p class="success-message">${message}</p>
         </c:if>
-        <p><strong>Order ID:</strong> ${order.order_id}</p>
+        <p><strong>Order ID:</strong> ${order.orderId}</p>   <!-- This shows formatted ID like ORD00001 -->
+
         <p><strong>Order Date:</strong> ${order.order_date}</p>
         <p class="order-money"><strong>Total Amount:</strong> ₹${order.total_amount}</p>
         <p class="status-of-order"><strong>Status:</strong> ${order.status}</p>

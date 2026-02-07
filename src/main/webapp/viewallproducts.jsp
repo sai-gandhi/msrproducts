@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>View All Products</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -100,7 +102,8 @@
                     <button class="toggle-btn" onclick="toggleDesc(this)">Show More</button>
                 </td>
                 <td>
-                    <a href="updateproduct?id=${product.id}">Edit</a>
+                    <a href="updateproduct?id=${product.id}"><i class="fa fa-edit"></i> Edit
+                    </a>
 
                 </td>
             </tr>
