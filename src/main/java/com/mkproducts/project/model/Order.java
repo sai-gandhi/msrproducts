@@ -12,16 +12,27 @@ import jakarta.persistence.*;
 @Entity
 @Table(name = "orders")
 public class Order {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int order_id;
+	 @Id
+	    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	    @Column(name = "order_id") // physical column name in DB
+	    private int id; // logical name for JPA use
+
+	    @Column(name = "order_code", unique = true) // renamed to avoid conflict
+	    private String orderId;
+	    
+	   
+
     
     @ManyToOne
     @JoinColumn(name = "customer_id")
     private Customer customer;
     
     private double total_amount;
-    private String status;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
+    private OrderStatus status;
+
     
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
@@ -54,12 +65,22 @@ public class Order {
     }
 
     // Getters and Setters
-    public int getOrder_id() {
-        return order_id;
+    
+    
+    public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getOrderId() {
+        return orderId;
     }
 
-    public void setOrder_id(int order_id) {
-        this.order_id = order_id;
+    public void setOrderId(String orderId) {
+        this.orderId = orderId;
     }
 
     public Customer getCustomer() {
@@ -78,13 +99,16 @@ public class Order {
         this.total_amount = total_amount;
     }
 
-    public String getStatus() {
+   
+
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
     }
+
 
     public LocalDateTime getOrder_date() {
         return order_date;

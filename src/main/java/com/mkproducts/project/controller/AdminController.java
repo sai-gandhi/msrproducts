@@ -2,6 +2,7 @@ package com.mkproducts.project.controller;
 
 import java.io.IOException;
 
+
 import java.io.OutputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
@@ -17,11 +18,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+
 import com.mkproducts.project.model.Admin;
 import com.mkproducts.project.model.Contactus;
+import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Order;
+import com.mkproducts.project.model.OrderItem;
 import com.mkproducts.project.model.Product;
+import com.mkproducts.project.repository.OrderRepository;
 import com.mkproducts.project.service.AdminService;
 import com.mkproducts.project.service.CustomerService;
 
@@ -64,7 +69,7 @@ public class AdminController {
     }
     
     @GetMapping("adminhome")
-    public ModelAndView adminhome(HttpServletRequest request) {
+    public ModelAndView adminhome(HttpServletRequest request,HttpServletResponse response) {
         HttpSession session = request.getSession(false);
         if(session == null || session.getAttribute("admin") == null) {
             return new ModelAndView("redirect:/adminlogin");
@@ -234,15 +239,7 @@ public class AdminController {
         return "redirect:/viewallcontacts";
     }
     
-    @GetMapping("productdelete")
-    public String productdelete(@RequestParam int id, HttpServletRequest request) {
-        HttpSession session = request.getSession(false);
-        if(session == null || session.getAttribute("admin") == null) {
-            return "redirect:/adminlogin";
-        }
-        adminService.deleteProduct(id);
-        return "redirect:/viewallproducts";
-    }
+
     
     @GetMapping("updateproduct")
     public ModelAndView updateproduct(@RequestParam int id, HttpServletRequest request) {
@@ -315,19 +312,31 @@ public class AdminController {
         return mv;
     }
     
-    @PostMapping("updateorderstatus")
+    @Autowired
+    private OrderRepository orderRepository;
+
+    @PostMapping("/updateorderstatus")
     public String updateOrderStatus(@RequestParam("orderId") int orderId,
-                                  @RequestParam("status") String status,
-                                  @RequestParam(value = "message", required = false) String message,
-                                  HttpServletRequest request) {
+                                    @RequestParam("status") String status,
+                                    @RequestParam(value = "message", required = false) String message,
+                                    HttpServletRequest request) {
         HttpSession session = request.getSession(false);
-        if(session == null || session.getAttribute("admin") == null) {
+        if (session == null || session.getAttribute("admin") == null) {
             return "redirect:/adminlogin";
         }
-        
-        adminService.updateOrderStatus(orderId, status, message);
+
+        // ✅ Fetch the Order object from the DB
+        Order order = orderRepository.findById(orderId)
+                .orElseThrow(() -> new RuntimeException("Order not found with ID: " + orderId));
+        List<OrderItem> items = order.getItems();
+
+        // ✅ Pass the Order object and other parameters to the service
+        adminService.updateOrderStatus(order, orderId, status, message,items);
+
         return "redirect:/manageorders";
     }
+
+
     
     @GetMapping("vieworder")
     public ModelAndView viewOrder(@RequestParam int id, HttpServletRequest request) {
@@ -341,6 +350,23 @@ public class AdminController {
         mv.addObject("order", order);
         return mv;
     }
+    
+    @GetMapping("viewallcustomers")
+    public ModelAndView viewallstudents(HttpServletRequest request) {
+    	HttpSession session=request.getSession(false);
+    	if(session==null||session.getAttribute("admin")==null) {
+    		return new ModelAndView("redirect:/adminlogin");
+    	}
+      ModelAndView mv=new ModelAndView();
+      mv.setViewName("viewallcustomers");
+      long count=adminService.customercount();
+      mv.addObject("count",count);
+      List<Customer> customers=adminService.viewAllCustomers();
+      mv.addObject("customerlist",customers);
+      return mv;
+    }
+    
+   
     
    
 }

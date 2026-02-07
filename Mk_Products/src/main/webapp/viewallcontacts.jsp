@@ -1,14 +1,66 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
+<style>
+.MSR_title{
+color:green;
+text-align:center;
+
+}
+.heading{
+color:black;
+}
+th{
+background-color: yellow;
+height:40px;
+width: 1000px;
+text-decoration: blink;
+color: blue;
+font-size: 1em;
+}
+a{
+color:red;
+}
+td{
+color:green;
+text-align: center;
+}
+.dataplace:hover {
+    text-color: red;
+    text-align: center;
+}
+
+body{
+background-color: lightgray;
+}
+.customerid{
+color:red;
+}
+
+img:hover{
+border-radius:25px;
+background-color: red;
+
+
+
+}
+table{
+background-color:white;
+}
+
+</style>
 <head>
     <title>View All Contact</title>
 </head>
 <body>
-    <h2>View All Contact Information</h2>
-    <a href="adminhome.jsp">Back to home</a>
+
+
+     <h2 class="MSR_title">MSR Service</h2>
+      <a href="adminhome.jsp">Back to home</a><br><br>
+    <h2 class="heading">View All Contact Information</h2>
+   
     
-    <table border="1">
+    <table border="2">
         <thead>
             <tr>
                 <th>Customer ID</th>
@@ -21,10 +73,10 @@
                 <th>Action</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody >
             <c:forEach var="contactus" items="${contacts}">
-                <tr>
-                    <td>${contactus.id}</td>
+                <tr class="dataplace">
+                    <td class="customerid">${contactus.id}</td>
                     <td>${contactus.name}</td>
                     <td>${contactus.contact}</td>
                     <td>${contactus.location}</td>
@@ -37,7 +89,7 @@
                                 <img src="displaycontactimage?id=${contactus.id}" alt="Contact Image" width="100" height="100"/>
                             </c:when>
                             <c:otherwise>
-                                <img src="default-image.jpg" alt="Default Image" width="100" height="100"/>
+                                <img  src="default-image.jpg" alt="Default Image" class="image" width="100" height="100"/>
                             </c:otherwise>
                         </c:choose>
                     </td>
@@ -48,5 +100,6 @@
             </c:forEach>
         </tbody>
     </table>
+    <%@include file="footer.jsp" %>
 </body>
 </html>

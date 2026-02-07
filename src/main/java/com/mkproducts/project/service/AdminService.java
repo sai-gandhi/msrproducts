@@ -4,8 +4,10 @@ import java.util.List;
 
 import com.mkproducts.project.model.Admin;
 import com.mkproducts.project.model.Contactus;
+import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.MarketRate;
 import com.mkproducts.project.model.Order;
+import com.mkproducts.project.model.OrderItem;
 import com.mkproducts.project.model.Product;
 
 public interface AdminService {
@@ -17,7 +19,7 @@ public interface AdminService {
     String updateProduct(Product product);
     List<Product> viewAllProduct();
     Product displayProductiById(int id);
-    void deleteProduct(int id);
+    
     
     // Contact Management
     List<Contactus> viewAllContacts();
@@ -33,5 +35,12 @@ public interface AdminService {
     List<Order> getPendingOrders();
     List<Order> getProcessedOrders();
     Order getOrderById(int id);
-    void updateOrderStatus(int orderId, String status, String message);
+    void updateOrderStatus(Order order,int orderId, String status, String message, List<OrderItem> items);
+
+    
+    
+	long customercount();
+	List<Customer> viewAllCustomers();
+
+	
 }

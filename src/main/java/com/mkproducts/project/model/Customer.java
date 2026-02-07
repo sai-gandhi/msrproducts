@@ -1,5 +1,7 @@
 package com.mkproducts.project.model;
 
+
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -9,6 +11,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="Customer_Table")
+
 public class Customer {
 	
 	@Id
@@ -17,13 +20,13 @@ public class Customer {
 	private int id;
 	@Column(name="customer_name",nullable = false,length = 50)
 	private String name;
-	@Column(name="customer_email",nullable = false,length = 55)
+	@Column(name="customer_email",unique=true,nullable = false,length = 55)
 	private String email;
 	@Column(name="customer_password",nullable = false,length = 15)
 	private String password;
 	@Column(name="customer_location",nullable = false,length = 50)
 	private String location;
-	@Column(name="customer_contact",nullable = false,length = 10)
+	@Column(name="customer_contact",unique = true, nullable = false , length = 10)
 	private String contact;
 	
 	public int getId() {
@@ -62,6 +65,7 @@ public class Customer {
 	public void setContact(String contact) {
 		this.contact = contact;
 	}
+	
 	
 
 }

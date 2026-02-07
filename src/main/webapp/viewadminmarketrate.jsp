@@ -3,6 +3,8 @@
 <html>
 <head>
     <title>Market Prices</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    
     <style>
         /* General page styling */
         body {
@@ -148,7 +150,9 @@
                     <td>${marketrate.maxrate}</td>
                     <td>${marketrate.avgrate}</td>
                     <td>${marketrate.minrate}</td>
-                    <td><a href="<c:url value='/deletemarketrate?id=${marketrate.id}' />" onclick="return confirm('Are you sure you want to delete this market rate?');">Delete</a></td>
+                    <td><a href="<c:url value='/deletemarketrate?id=${marketrate.id}' />" onclick="return confirm('Are you sure you want to delete this market rate?');">
+                    <i class="fa fa-trash"></i> Delete
+                   </a></td>
                 </tr>
             </c:forEach>
         </tbody>

@@ -200,31 +200,38 @@
     <div class="register-container">
       <h2 class="register-heading">Customer Registration</h2>
       
-      <div class="form-group">
-        <label for="uname">Username</label>
-        <input type="text" id="uname" placeholder="Enter username" name="uname" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" placeholder="Enter email" name="email" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter password" name="password" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="location">Location</label>
-        <input type="text" id="location" placeholder="Enter location" name="location" required>
-      </div>
-      
-      <div class="form-group">
-        <label for="contact">Contact</label>
-        <input type="tel" id="contact" placeholder="Enter 10-digit number" 
-               name="contact" pattern="\d{10}" title="Please enter 10 digits" required>
-      </div>
+       <c:if test="${not empty message}">
+    <div style="color: ${message.startsWith('Error') ? 'red' : 'green'}; margin-bottom: 15px; font-weight: bold;">
+      ${message}
+    </div>
+  </c:if>
+  
+  <form action="customerregistration" method="post">
+    <div class="form-group">
+      <label for="uname">Username</label>
+      <input type="text" id="uname" placeholder="Enter username" name="uname" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="Enter email" name="email" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter password" name="password" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input type="text" id="location" placeholder="Enter location" name="location" required>
+    </div>
+    
+    <div class="form-group">
+      <label for="contact">Contact</label>
+      <input type="tel" id="contact" placeholder="Enter 10-digit number" 
+             name="contact" pattern="\d{10}" title="Please enter 10 digits" required>
+    </div>
       
       <div class="button-group">
         <button type="submit" class="btn btn-register">Register</button>

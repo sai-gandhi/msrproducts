@@ -6,16 +6,21 @@
 <meta charset="UTF-8">
 <title>Admin Navbar</title>
 </head>
-<body>
-<h2 align="center">MSR Products</h2>
-<a href="adminhome">Home</a>&nbsp;&nbsp;
-<a href="#">View All Customers</a>&nbsp;&nbsp;
-<a href="addproduct">Add product</a>&nbsp;&nbsp;
-<a href="viewallproducts">View All products</a>&nbsp;&nbsp;
-<a href="addrates">Add Market Rates</a>&nbsp;&nbsp;
-<a href="viewadminmarketrate">View Market Rates</a>&nbsp;&nbsp;
-<a href="viewallcontacts">View All Contacts</a>&nbsp;&nbsp;
-<a href="adminlogin">Logout</a>&nbsp;&nbsp;
-
-</body>
+	<body>
+		<div class="admin-top-navbar">
+			<h2 >MSR Services</h2>
+		</div>
+			
+			<a href="adminhome">Home</a>&nbsp;&nbsp;<br><br>
+			<a href="viewallcustomers">View All Customers</a>&nbsp;&nbsp;<br><br>
+			<a href="addproduct">Add product</a>&nbsp;&nbsp;<br><br>
+			<a href="viewallproducts">View All products</a>&nbsp;&nbsp;<br><br>
+			<a href="addrates">Add Market Rates</a>&nbsp;&nbsp;<br><br>
+			<a href="viewadminmarketrate">View Market Rates</a>&nbsp;&nbsp;<br><br>
+			<a href="viewallcontacts">View All Contacts</a>&nbsp;&nbsp;<br><br>
+			<a href="manageorders">Manage Order</a>&nbsp;&nbsp;<br><br>
+			<a align="left" href="adminlogin">Logout</a>&nbsp;&nbsp;<br><br>
+			
+	
+	</body>
 </html>

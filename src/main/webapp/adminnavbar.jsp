@@ -12,7 +12,7 @@
 		</div>
 			
 			<a href="adminhome">Home</a>&nbsp;&nbsp;<br><br>
-			<a href="#">View All Customers</a>&nbsp;&nbsp;<br><br>
+			<a href="viewallcustomers">View All Customers</a>&nbsp;&nbsp;<br><br>
 			<a href="addproduct">Add product</a>&nbsp;&nbsp;<br><br>
 			<a href="viewallproducts">View All products</a>&nbsp;&nbsp;<br><br>
 			<a href="addrates">Add Market Rates</a>&nbsp;&nbsp;<br><br>

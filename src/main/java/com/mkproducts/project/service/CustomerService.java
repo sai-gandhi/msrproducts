@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
+
 import com.mkproducts.project.model.Contactus;
 import com.mkproducts.project.model.Customer;
 import com.mkproducts.project.model.Feedback;
@@ -19,12 +20,17 @@ public interface CustomerService {
 	Customer checkCustomerLogin(String email, String password);
 
 	String addContactus(Contactus c);
+	void sendContactNotification(Contactus contact);
 	
-	String addFeedback(Feedback c);
+	String addFeedback(Feedback c,Customer customer);
 
 	List<MarketRate> viewAllRates();
 
-	String saveCustomer(Customer customer);
+	//String saveCustomer(Customer customer);
+	//void sendCustomerRegistration(Customer customer);
+	
+	 String registerWithOtp(Customer customer);
+	 boolean verifyOtp(String email, String otp);
 
 	List<Product> viewAllProducts();
 
@@ -39,13 +45,20 @@ public interface CustomerService {
 	
 	
 	List<Product> getAllAvailableProducts();
-    String placeOrder(Order order, List<OrderItem> items);
+    String placeOrder(Order order, List<OrderItem> items,Customer customer);
     List<Order> getCustomerOrders(Customer customer);
     Order getOrderById(int orderId);
 //    List<Notification> getCustomerNotifications(Customer customer);
 //    void markNotificationAsRead(int notificationId);
     void updateProductStock(Product product, int quantity);
 
+    Order getOrderByOrderCode(String orderCode);
+
+	//String loadTemplate(String path) throws IOException;
+
+
+    
+    
 	
 
 
