@@ -4,83 +4,134 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Customer Home</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
 <style>
-/* General Reset */
+:root {
+    --accent-green: #22c55e;
+    --accent-dark: #16a34a;
+    --bg-dark: #020617;
+    --bg-glass: rgba(255,255,255,0.08);
+    --border-soft: rgba(255,255,255,0.15);
+    --text-main: #e5e7eb;
+    --text-muted: #94a3b8;
+}
+
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: Arial, sans-serif;
+    font-family: 'Inter', 'Segoe UI', sans-serif;
 }
 
-body {
-    background-color: #f4f4f4;
-    text-align: center;
-}
-
-/* Navbar Styling */
+/* NAVBAR */
 .customernavbar {
-    background-color: green;
-    color: white;
-    padding: 5px;
-    font-size: 24px;
-    font-weight: bold;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background: linear-gradient(
+        90deg,
+        rgba(2,6,23,0.95),
+        rgba(15,23,42,0.95)
+    );
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border-soft);
+    padding: 14px 40px;
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    
+    justify-content: space-between;
 }
 
-.customernavbar a {
+/* LOGO */
+.brand {
+    font-size: 1.6rem;
+    font-weight: 600;
+    background: linear-gradient(90deg, var(--accent-green), #86efac);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* NAV LINKS */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    color: var(--text-main);
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* ACTIVE LINK (optional) */
+.nav-links a.active {
+    background: rgba(34,197,94,0.2);
+    color: #86efac;
+}
+
+/* LOGOUT */
+.logout-btn {
+    background: linear-gradient(135deg, var(--accent-green), var(--accent-dark));
     color: white;
+    padding: 8px 18px;
+    border-radius: 999px;
     text-decoration: none;
-    font-size: 18px;
-    background-color: #333;
-    padding: 8px 12px;
-    border-radius: 5px;
-    transition: background 0.3s;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
-.customernavbar a:hover {
-    background-color: #555;
+.logout-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(34,197,94,0.5);
 }
 
+/* RESPONSIVE */
+@media (max-width: 900px) {
+    .customernavbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px 20px;
+    }
 
-
-/* Navigation Links */
-body a {
-    display: inline-block;
-    color: black;
-    text-decoration: none;
-    text-transform: capitalize;
-    font-size: 18px;
-    padding: 10px 15px;
-    margin: 10px;
-    background-color: #ddd;
-    border-radius: 5px;
-    transition: all 0.3s ease-in-out;
+    .nav-links {
+        flex-wrap: wrap;
+        justify-content: center;
+    }
 }
-
-body a:hover {
-    background-color: #bbb;
-}
-
-
 </style>
 </head>
+
 <body>
+
 <div class="customernavbar">
-    <h2 align="left">MSR Products</h2>
-    <a class="logout-button" align="right" href="customerlogin">Logout</a>
+
+    <div class="brand">MSR Products</div>
+
+    <div class="nav-links">
+        <a href="customerhome">Home</a>
+        <a href="customerviewallproducts">Products</a>
+        <a href="placeorder">Place Order</a>
+        <a href="myorders">My Orders</a>
+        <a href="crop_details">Crop Details</a>
+        <a href="feedback">Feedback</a>
+        <a href="viewfeedback">View Feedback</a>
+    </div>
+
+    <a href="customerlogin" class="logout-btn">Logout</a>
+
 </div>
 
-<a href="customerhome">Home</a>&nbsp;&nbsp;
-<a href="customerviewallproducts">View Products</a>&nbsp;&nbsp;
-<a href="feedback">Feedback</a>&nbsp;&nbsp;
-<a href="viewfeedback">View Feedbacks</a>&nbsp;&nbsp;
-<a href="placeorder">Place Order</a>
-<a href="myorders">My Orders</a>
-<a href="crop_details">Crop Details</a>&nbsp;&nbsp;
 </body>
 </html>
